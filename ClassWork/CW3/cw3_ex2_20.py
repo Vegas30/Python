@@ -20,3 +20,4 @@ x = digits * 100 + hundreds * 10 + tens
 
 print(x)
 
+
