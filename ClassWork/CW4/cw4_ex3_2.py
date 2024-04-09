@@ -9,8 +9,8 @@ x = False
 y = True
 z = False
 
-x_or_z = x or z # False
-x_and_y = x and y # False
-x_and_z = x and z # False
+x_or_z = x or z  # False
+x_and_y = x and y  # False
+x_and_z = x and z  # False
 
 print(x_or_z, x_and_y, x_and_z)
