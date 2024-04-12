@@ -15,3 +15,4 @@ c = False
 result_1 = a or (b and (not c)) # True
 result_2 = a and (not b) or c
 result_3 = not a and not b
+
