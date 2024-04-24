@@ -12,6 +12,27 @@ else:
     digit_2 = (number // 100) % 10
     digit_3 = (number // 10) % 10
     digit_4 = number % 10
+    # произведение цифр числа
+    product_of_digits = digit_1 * digit_2 * digit_3 * digit_4
     # а)
     if digit_1 + digit_2 == digit_3 + digit_4:
         print(f"сумма двух первых цифр числа {number} равна сумме двух его последних цифр")
+    else:
+        print(f"сумма двух первых цифр числа {number} не равна сумме двух его последних цифр")
+    # б)
+    if (digit_1 + digit_2 + digit_3 + digit_4) % 3 == 0:
+        print(f"сумма цифр числа {number} кратна трем")
+    else:
+        print(f"сумма цифр числа {number} не кратна трем")
+    # в)
+    if product_of_digits % 4 == 0:
+        print(f"Произведение цифр числа {number} кратно четырем")
+    else:
+        print(f"Произведение цифр числа {number} не кратно четырем")
+    # г)
+    a = int(input("Введите число а: "))
+    if product_of_digits % a == 0:
+        print(f"Произведение цифр числа {number} кратно числу а = {a}")
+    else:
+        print(f"Произведение цифр числа {number} не кратно числу а = {a}")
+
