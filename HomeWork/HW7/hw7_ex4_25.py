@@ -9,7 +9,7 @@ d = float(input("Введите число d "))
 if a <= 0 or b <= 0:
     print("Ошибка. Число должно быть положительным")
 else:
-    if a / b == c or b:
+    if (a / b == c) or (a / b == d):
         print("Верно")
     else:
         print("Не верно")
