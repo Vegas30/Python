@@ -2,9 +2,11 @@
 # превышают n.
 
 def calculate_some(n):
+    i = 1
+    while i ** 2 <= n:
+        print(i ** 2)
+        i += 1
 
-
-    while
 
 def main():
     num = int(input("Введите число n: "))
