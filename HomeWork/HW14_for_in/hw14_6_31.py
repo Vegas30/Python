@@ -11,6 +11,9 @@ def calculate_func(n):
     for i in range(1, n + 1):
         sum += l * (1 / i)
         l = l * (-1)
+        print("sum", sum)
+        print(l)
+        print("----------")
     print(sum)
 
 
