@@ -4,9 +4,9 @@ def calculate_func(x):
     summ = 1
     numerator = 1
     denumerator = 2
-    sign = 1
+    sign = -1
     for i in range(1, 13):
-        summ -= sign * ((numerator / denumerator) ** x)
+        summ += sign * ((numerator / denumerator) ** x)
         sign = sign * (-1)
         numerator += 1
         denumerator += 1
