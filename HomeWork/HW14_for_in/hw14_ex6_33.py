@@ -10,8 +10,6 @@ def calculate_func(x):
         sign = sign * (-1)
         numerator += 1
         denumerator += 1
-        print(summ)
-        print("----------")
     return summ
 
 
