@@ -61,4 +61,3 @@ print(fib)
 list_sum_15 = [(x,y,z) for x in range(1, 10+1) for y in range(1, 10 +1) for z in range(1, 10 + 1) if x+y+z == 15]
 print(list_sum_15)
 
-#
