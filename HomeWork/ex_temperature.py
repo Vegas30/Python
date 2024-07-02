@@ -40,19 +40,48 @@ def last_day_index(month, t):
             index_of_day = month.index(day)
             return index_of_day
 
+
 def low_tmp_days_amount(month, t):
     result = sum(list(filter(lambda x: t > x, month)))
     return result
 
+
 def add_few_days(month, n):
     new_array = month + month[n:]
     return new_array
+
 
 def del_last_day(month):
     new_array = month[:]
     new_array.pop()
     return new_array
 
+
+def high_temp_filter(month, t):
+    new_array = list(filter(lambda x: t < x, month))
+    return new_array
+
+
+def celsius_to_fahrenheit(month):
+    # (100 °C × 9/5) + 32 = 212 °F
+    temp_in_fahrenheit = [celsius * 1.8 for celsius in month]
+    return temp_in_fahrenheit
+
+
+def any_day_high_level_temp(month, t):
+    if any(list(filter(lambda x: x > t, month))):
+        print("Верно, был хотя бы один день с температурой выше заданного значения")
+    else:
+        print("Не верно, не было хотя бы одного дня с температурой выше заданного значения")
+
+
+def all_days_high_level_temp(month, t):
+    if all(list(filter(lambda x: x > t, month))):
+        print("Верно, все дни с температурой выше заданного значения")
+    else:
+        print("Не Верно, не все дни с температурой выше заданного значения")
+
+def month_sort_min_max():
 
 
 def print_menu():
@@ -63,19 +92,42 @@ def print_menu():
 
 
 def main():
-    temperature_by_days_array = [random.randint(-2, 7) for _ in range(30)]
-    print("Температура по дням: ", temperature_by_days_array)
+    first_month = [random.randint(-2, 7) for _ in range(30)]
+    print("Температура по дням: ", first_month)
     while True:
         print_menu()
         choice = input("Выберите действие (1/2/3): ")
         print(type(choice))
         if choice == '1':
-            index_of_first_day = first_day_index(temperature_by_days_array)
+            index_of_first_day = first_day_index(first_month)
             print(f"Индекс первого дня, когда температура превысила заданное значение: {index_of_first_day}")
         elif choice == '2':
             nomer = int(input("Введите номер желаемого элемента: "))
             new_array = pop_array(main_array, nomer - 1)
             print(f"Новый список после удаления последнего элемента списка: {new_array}")
+        elif choice == '6':
+            second_month = [random.randint(-2, 7) for _ in range(31)]
+            print("Температура второго месяца по дням: ", second_month)
+            new_array = first_month.extend(second_month)
+            print(
+                f"Новый список после объединения двух списков температур, представляющих собой данные двух разных месяцев: {new_array}")
+        elif choice == '11':
+            print("Температура месяца по дням: ", first_month)
+            accept = input(
+                "Внимание основной список температур будет очищен и программа будет завершена, для подтверждения нажмите [y] или любую клавишу для продолжения")
+            if accept == 'y':
+                first_month.clear()
+                print("Температура месяца по дням: ", first_month)
+                break
+            else:
+                continue
+        elif choice == '12':
+            sorted_month = sorted(first_month, key=abs)
+            print("Температуры сортируются по их абсолютному значению: \n", sorted_month)
+        elif choice == '13':
+            days_amount = len(first_month)
+            print("Общее количество дней (элементов) в списке температур: ", days_amount)
+
         elif choice == '3':
             print("Программа завершена.")
             break
