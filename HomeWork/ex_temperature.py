@@ -83,6 +83,7 @@ def all_days_high_level_temp(month, t):
 
 
 def month_sort_min_max():
+    pass
 
 
 def print_menu():
