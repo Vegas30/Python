@@ -52,7 +52,8 @@ print(result)
 result = {x for x in set1.intersection(set2) if x % 2 == 0}
 print(result)
 
-# Написать функцию, которая принимает двумерный список и возвращает множество, которые уникальные для каждого списка (не встречаются в других списках)
+# Написать функцию, которая принимает двумерный список и возвращает множество,
+# которые уникальные для каждого списка (не встречаются в других списках)
 lists = [
     [1, 2, 3],
     [3, 4, 5],
@@ -69,12 +70,15 @@ print(result)
 
 set1 = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13}
 
+
 def is_prime(n):
     if n < 2:
         return False
-    for i in range(2, int(n**0,5)+1):
+    for i in range(2, int(n ** 0.5) + 1):
         if n % i == 0:
             return False
     return True
 
+
 result = {num for num in set1 if is_prime(num)}
+print(result)
