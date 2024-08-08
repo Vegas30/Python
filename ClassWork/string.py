@@ -125,7 +125,7 @@ list1 = ['First line', 'Second line', 'Third line']
 # 1: First line
 # 2: Second line
 # 3: Third line
-s_result = "\n".join(f"{index+1}: {values}" for index, values in enumerate(s))
+s_result = "\n".join(f"{index + 1}: {values}" for index, values in enumerate(s))
 print(s_result)
 
 dict1 = {}
@@ -133,3 +133,28 @@ for idx, val in enumerate(list1, 1):
     dict1[idx] = val
 
 print(dict1)
+
+# 18. Принимает строку от пользователя и слово для замены и заменяет найденное слово на новое
+s = "Привет как дела. Отлично нет, хорошо!"
+s_result = s.strip().lower().replace('дела', 'хорошо')
+
+s_result = s.split()
+print(s_result)
+update_s = ['хорошо.' if i == 'дела.' else i for i in s_result]
+print(update_s)
+s_result = ' '.join(update_s)
+print(s_result)
+
+# 19. Получить элемент по его индексу.
+s = "Привет, как дела"
+element = s[3]
+print(element)
+
+# 20. Дана строка 'Hello world' поменять местами буквы в слове 'world'.
+
+# 21. Дана строка "Hello world"
+
+# 22. Дана строка "Привет мир!" получить список и строку всех гласных букв.
+s = "Привет мир!"
+glas = 'ауоиэыяюеёАУОИЭЫЯЮЕЁ'
+result = [j for i in glas for j in s if j == i]
