@@ -160,6 +160,7 @@ def list_num_to_string(lst):
     res_str = '.'.join([str(num) for num in lst])
     return res_str
 
+
 # 15. Преобразование строковых чисел в целые
 # Напишите функцию, которая принимает список строковых чисел и
 # возвращает список этих чисел в виде строк.
@@ -167,6 +168,7 @@ def list_num_to_string(lst):
 def list_charnum_to_num(lst):
     res_list = [int(char) for char in lst]
     return res_list
+
 
 # 16. Добавить индекс к строкам
 # Напишите функцию, которая принимает список строк и возвращает
@@ -177,6 +179,7 @@ def index_to_string(lst):
     result_str = ', '.join(f"[{index}] {values}" for index, values in enumerate(lst, start=1))
     return result_str
 
+
 # 17. Нумерация строк
 # Напишите функцию, которая принимает список строк и возвращает
 # одну строку, где каждая строка нумеруется.
@@ -186,6 +189,7 @@ def string_numbering(lst):
     result_str = '\n'.join(f"{index}: {values}" for index, values in enumerate(lst, start=1))
     return result_str
 
+
 # 18. Заменить символы на пробелы
 # Напишите функцию, которая заменяет все вхождения определённого
 # символа в строке на пробелы.
@@ -193,6 +197,24 @@ def string_numbering(lst):
 def replace_symbol_in_str(str, char):
     result_str = str.replace(char, " ")
     return result_str
+
+
+# 19. Выделить гласные и согласные
+# Напишите функцию, которая принимает строку и возвращает кортеж
+# из двух списков: первый содержит все гласные буквы, второй —
+# согласные.
+# Пример: s = 'Hello World' → result = (['e', 'o', 'o'], ['H', 'l', 'l', 'W', 'r', 'l', 'd'])
+def vowels_and_consonants(str):
+    vowels = 'аоеиуюяэАОЕИУЮЯЭaeiouyAEIOUY'
+    vovels_list = []
+    consonants_list = []
+    for char in str:
+        if char.isalpha():
+            if char in vowels:
+                vovels_list.append(char)
+            else:
+                consonants_list.append(char)
+    return vovels_list, consonants_list
 
 
 def main():
@@ -289,6 +311,12 @@ def main():
     char = ','
     s_result = replace_symbol_in_str(s, char)
     print(s_result)
+
+    # 19. Выделить гласные и согласные
+    s = 'Hello World'
+    result = vowels_and_consonants(s)
+    print(result)
+
 
 if __name__ == '__main__':
     main()
