@@ -230,6 +230,7 @@ def index_of_char(str, char):
             result_list.append(index)
     return result_list
 
+
 # 21. Удаление дубликатов слов с сохранением порядка
 # Напишите функцию, которая удаляет дубликаты слов из строки, сохраняя
 # порядок их появления.
@@ -243,6 +244,7 @@ def no_dublicate_in_string(str):
     result_str = " ".join(new_str_list)
     return result_str
 
+
 # 22. Перестановка символов
 # Напишите функцию, которая генерирует все возможные перестановки
 # символов в строке.
@@ -252,6 +254,7 @@ def char_permutat(str):
     result = list(''.join(p) for p in perms)
     return result
 
+
 # 23. Подсчет вхождений подстроки
 # Напишите функцию, которая подсчитывает количество вхождений
 # подстроки в строке без перекрытия.
@@ -259,6 +262,7 @@ def char_permutat(str):
 def substring_count(str, sub):
     result = str.count(sub)
     return result
+
 
 # 24. Создание аббревиатуры
 # Напишите функцию, которая создает аббревиатуру из строки, сохраняя
@@ -270,6 +274,7 @@ def make_abbreviation(str):
     for word in words_list:
         result += word[0].upper()
     return result
+
 
 # 25. Сравнение двух строк с учетом частоты символов
 # Напишите функцию, которая сравнивает две строки и возвращает True,
@@ -289,6 +294,7 @@ def compare_string_frequency(s1, s2):
 
     return char_freq_s1 == char_freq_s2
 
+
 # 26. Извлечение подстрок с заданной длиной
 # Напишите функцию, которая извлекает все подстроки заданной длины из
 # строки.
@@ -297,8 +303,58 @@ def extract_substring_with_length(str, length):
     result = []
     # result = [str[i:i+length] for i in range(len(str) - length + 1)]
     for i in range(len(str) - length + 1):
-        result.append(str[i:i+length])
+        result.append(str[i:i + length])
     return result
+
+
+# 27. Проверка строки на наличие цифр и букв
+# Напишите функцию, которая проверяет, содержит ли строка хотя бы одну
+# букву и хотя бы одну цифру.
+# Пример: s = 'Hello123' → result = True
+def check_string_for_letters_and_digits(str):
+    has_letters = False
+    has_number = False
+    for char in str:
+        if char.isalpha():
+            has_letters = True
+        if char.isalnum():
+            has_number = True
+        if has_letters and has_number:
+            return True
+
+    return False
+
+
+# 28. Группировка символов по типу
+# Напишите функцию, которая группирует символы строки по типу: буквы,
+# цифры, специальные символы.
+# Пример: s = 'abc123!@#' → result = {'letters': 'abc', 'digits': '123', 'special':
+# '!@#'}
+def group_by_type(str):
+    group = {'letters': '', 'digits': '', 'specials': ''}
+    for char in str:
+        if char.isalpha():
+            group['letters'] += char
+        elif char.isdigit():
+            group['digits'] += char
+        else:
+            group['specials'] += char
+    return group
+
+# 29. Удаление символов на основе условий
+# Напишите функцию, которая удаляет из строки все символы, которые
+# встречаются больше N раз.
+# Пример: s = 'hello world', N = 2 → s_result = 'h wrd'
+def remove_char_that_appear_more_N(str, n):
+    char_count = {}
+    s_result = ""
+    for char in str:
+        char_count[char] = char_count.get(char, 0) + 1
+    for char in str:
+        if char_count[char] <= n:
+            s_result += char
+
+    return s_result
 
 def main():
     # 1. Перевернуть строку
@@ -438,5 +494,22 @@ def main():
     length = 2
     result = extract_substring_with_length(s, length)
     print(result)
+
+    # 27. Проверка строки на наличие цифр и букв
+    s = 'Hello123'
+    result = check_string_for_letters_and_digits(s)
+    print(result)
+
+    # 28. Группировка символов по типу
+    s = 'abc123!@#'
+    result = group_by_type(s)
+    print(result)
+
+    # 29. Удаление символов на основе условий
+    s = 'hello world'
+    N = 2
+    s_result = remove_char_that_appear_more_N(s, N)
+    print(s_result)
+
 if __name__ == '__main__':
     main()
