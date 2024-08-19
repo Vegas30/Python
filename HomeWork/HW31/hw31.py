@@ -290,6 +290,5 @@ def main():
     s_result = replace_symbol_in_str(s, char)
     print(s_result)
 
-
 if __name__ == '__main__':
     main()
