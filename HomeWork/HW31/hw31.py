@@ -1,4 +1,5 @@
 import string
+from itertools import permutations
 
 
 # 1. Перевернуть строку
@@ -217,6 +218,88 @@ def vowels_and_consonants(str):
     return vovels_list, consonants_list
 
 
+# 20. Индексы всех вхождений символа
+# Напишите функцию, которая возвращает список индексов всех
+# вхождений заданного символа в строке.
+# Пример: s = 'hello', char = 'l' → result = [2, 3]
+def index_of_char(str, char):
+    result_list = []
+    str_list = enumerate(str)
+    for index, value in str_list:
+        if value == char:
+            result_list.append(index)
+    return result_list
+
+# 21. Удаление дубликатов слов с сохранением порядка
+# Напишите функцию, которая удаляет дубликаты слов из строки, сохраняя
+# порядок их появления.
+# Пример: s = 'hello world hello everyone' → s_result = 'hello world everyone'
+def no_dublicate_in_string(str):
+    new_str_list = []
+    str_list = str.split()
+    for word in str_list:
+        if word not in new_str_list:
+            new_str_list.append(word)
+    result_str = " ".join(new_str_list)
+    return result_str
+
+# 22. Перестановка символов
+# Напишите функцию, которая генерирует все возможные перестановки
+# символов в строке.
+# Пример: s = 'abc' → result = ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+def char_permutat(str):
+    perms = list(permutations(str))
+    result = list(''.join(p) for p in perms)
+    return result
+
+# 23. Подсчет вхождений подстроки
+# Напишите функцию, которая подсчитывает количество вхождений
+# подстроки в строке без перекрытия.
+# Пример: s = 'abcabc', sub = 'abc' → result = 2
+def substring_count(str, sub):
+    result = str.count(sub)
+    return result
+
+# 24. Создание аббревиатуры
+# Напишите функцию, которая создает аббревиатуру из строки, сохраняя
+# первую букву каждого слова в верхнем регистре.
+# Пример: s = 'Hello World This Is Python' → result = 'HWTIP'
+def make_abbreviation(str):
+    words_list = str.split()
+    result = ''
+    for word in words_list:
+        result += word[0].upper()
+    return result
+
+# 25. Сравнение двух строк с учетом частоты символов
+# Напишите функцию, которая сравнивает две строки и возвращает True,
+# если они имеют одинаковую частоту символов, и False в противном случае.
+# Пример: s1 = 'aabbcc', s2 = 'abcabc' → result = True
+def compare_string_frequency(s1, s2):
+    if len(s1) != len(s2):
+        return False
+    char_freq_s1 = {}
+    char_freq_s2 = {}
+
+    for char in s1:
+        char_freq_s1[char] = char_freq_s1.get(char, 0) + 1
+
+    for char in s2:
+        char_freq_s2[char] = char_freq_s2.get(char, 0) + 1
+
+    return char_freq_s1 == char_freq_s2
+
+# 26. Извлечение подстрок с заданной длиной
+# Напишите функцию, которая извлекает все подстроки заданной длины из
+# строки.
+# Пример: s = 'abcde', length = 2 → result = ['ab', 'bc', 'cd', 'de']
+def extract_substring_with_length(str, length):
+    result = []
+    # result = [str[i:i+length] for i in range(len(str) - length + 1)]
+    for i in range(len(str) - length + 1):
+        result.append(str[i:i+length])
+    return result
+
 def main():
     # 1. Перевернуть строку
     s = 'hello world'
@@ -236,87 +319,124 @@ def main():
     # 4. Инвертировать регистр
     s = 'Python Programming'
     result = invert_register(s)
-    print(result)
+    print("4.", result)
 
     # 5. Объединить два списка без повторений
     list1 = ['x', 'y', 'z']
     list2 = ['y', 'z', 'a']
     res_list = union_two_lists(list1, list2)
-    print(res_list)
+    print("5.", res_list)
 
     # 6. Подсчет символов в строке
     s = 'hello world'
     result = char_count(s)
-    print(result)
+    print("6.", result)
 
     # 7. Первый и последний символ каждого слова
     s = "hello world"
     result = first_last_char(s)
-    print(result)
+    print("7.", result)
 
     # 8. Фильтрация по длине слов
     s = ['apple', 'banana', 'pear', 'kiwi']
     length = 4
     result = word_length_filter(s, length)
-    print(result)
+    print("8.", result)
 
     # 9. Сортировка слов по алфавиту
     s = ['banana', 'apple', 'cherry']
     result = char_sort(s)
-    print(result)
+    print("9.", result)
 
     # 10. Подсчет слов, начинающихся с заданной буквы
     s = 'apple apricot banana'
     letter = 'a'
     result = count_word_by_char(s, letter)
-    print(f"String: {s}, letter = {letter}, count = {result}")
+    print(f"10. String: {s}, letter = {letter}, count = {result}")
 
     # 11. Найти уникальные слова в строке
     s = 'hello Hello world world'
     result = uniq_word(s)
-    print(result)
+    print("11.", result)
 
     # 12. Перевод в нижний регистр
     s = ['Hello', 'WORLD']
     result = to_lower_list(s)
-    print(result)
+    print("12.", result)
 
     # 13. Объединение строк в одну
     s = ['apple', 'banana', 'cherry']
     s_result = union_list_to_stings(s) + "!"
-    print(s_result)
+    print("13.", s_result)
 
     # 14. Список чисел в строку
     list1 = [1, 2, 3]
     s_result = list_num_to_string(list1)
-    print(s_result)
+    print("14.", s_result)
 
     # 15. Преобразование строковых чисел в целые
     list1 = ['1', '2', '3']
     s_result = list_charnum_to_num(list1)
-    print(s_result)
+    print("15.", s_result)
 
     # 16. Добавить индекс к строкам
     s = ['apple', 'banana']
     s_result = index_to_string(s)
-    print(s_result)
+    print("16.", s_result)
 
     # 17. Нумерация строк
     list1 = ['First', 'Second', 'Third']
     s_result = string_numbering(list1)
-    print(s_result)
+    print("17.", s_result)
 
     # 18. Заменить символы на пробелы
     s = 'Hello, world!'
     char = ','
     s_result = replace_symbol_in_str(s, char)
-    print(s_result)
+    print("18.", s_result)
 
     # 19. Выделить гласные и согласные
     s = 'Hello World'
     result = vowels_and_consonants(s)
+    print("19.", result)
+
+    # 20. Индексы всех вхождений символа
+    s = 'hello'
+    char = 'l'
+    result = index_of_char(s, char)
+    print("20.", result)
+
+    # 21. Удаление дубликатов слов с сохранением порядка
+    s = 'hello world hello everyone'
+    s_result = no_dublicate_in_string(s)
+    print(s_result)
+
+    # 22. Перестановка символов
+    s = 'abc'
+    result = char_permutat(s)
+    print("22.", result)
+
+    # 23. Подсчет вхождений подстроки
+    s = 'abcabc'
+    sub = 'abc'
+    result = substring_count(s, sub)
+    print("23.", result)
+
+    # 24. Создание аббревиатуры
+    s = 'Hello World This Is Python'
+    result = make_abbreviation(s)
+    print("24.", result)
+
+    # 25. Сравнение двух строк с учетом частоты символов
+    s1 = 'aabbcc'
+    s2 = 'abcabc'
+    result = compare_string_frequency(s1, s2)
     print(result)
 
-
+    # 26. Извлечение подстрок с заданной длиной
+    s = 'abcde'
+    length = 2
+    result = extract_substring_with_length(s, length)
+    print(result)
 if __name__ == '__main__':
     main()
