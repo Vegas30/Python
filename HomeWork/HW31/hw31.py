@@ -351,7 +351,7 @@ def remove_char_that_appear_more_N(str, n):
     for char in str:
         char_count[char] = char_count.get(char, 0) + 1
     for char in str:
-        if char_count[char] <= n:
+        if char_count[char] < n:
             s_result += char
 
     return s_result
