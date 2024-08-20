@@ -341,6 +341,7 @@ def group_by_type(str):
             group['specials'] += char
     return group
 
+
 # 29. Удаление символов на основе условий
 # Напишите функцию, которая удаляет из строки все символы, которые
 # встречаются больше N раз.
@@ -355,6 +356,45 @@ def remove_char_that_appear_more_N(str, n):
             s_result += char
 
     return s_result
+
+
+# 30. Создание строки из ASCII-кодов
+# Напишите функцию, которая принимает список ASCII-кодов и возвращает
+# соответствующую строку.
+# Пример: ascii_codes = [104, 101, 108, 108, 111] → result = 'hello'
+def string_from_ASCII(lst):
+    lst_string = ''.join([chr(elem) for elem in lst])
+    return lst_string
+
+
+# 31. Сжатие строки
+# Напишите функцию, которая сжимает строку, заменяя последовательные
+# одинаковые символы на символ и количество его повторений.
+# Пример: s = 'aaabbc' → s_result = 'a3b2c1'
+def string_compression(str):
+    new_dict = {}
+    for char in str:
+        new_dict[char] = new_dict.get(char, 0) + 1
+    result = ''.join([f'{key}{value}' for key, value in new_dict.items()])
+    return result
+
+
+# 32. Поиск самой длинной подстроки без повторяющихся символов
+# Напишите функцию, которая находит самую длинную подстроку в строке
+# без повторяющихся символов.
+# Пример: s = 'abcabcbb' → result = 'abc'
+def find_longest_string(str):
+    pass
+
+
+# 33. Создание маски для пароля
+# Напишите функцию, которая создает маску для строки, заменяя все
+# символы, кроме первого и последнего, на звездочки.
+# Пример: s = 'password' → s_result = 'p******d'
+def password_mask(str):
+    new_str = str[0] + '*' * (len(str) - 2) + str[-1]
+    return new_str
+
 
 def main():
     # 1. Перевернуть строку
@@ -487,29 +527,50 @@ def main():
     s1 = 'aabbcc'
     s2 = 'abcabc'
     result = compare_string_frequency(s1, s2)
-    print(result)
+    print("25.", result)
 
     # 26. Извлечение подстрок с заданной длиной
     s = 'abcde'
     length = 2
     result = extract_substring_with_length(s, length)
-    print(result)
+    print("26.", result)
 
     # 27. Проверка строки на наличие цифр и букв
     s = 'Hello123'
     result = check_string_for_letters_and_digits(s)
-    print(result)
+    print("27.", result)
 
     # 28. Группировка символов по типу
     s = 'abc123!@#'
     result = group_by_type(s)
-    print(result)
+    print("28.", result)
 
     # 29. Удаление символов на основе условий
     s = 'hello world'
     N = 2
     s_result = remove_char_that_appear_more_N(s, N)
-    print(s_result)
+    print("29.", s_result)
+
+    # 30. Создание строки из ASCII-кодов
+    ascii_codes = [104, 101, 108, 108, 111]
+    result = string_from_ASCII(ascii_codes)
+    print("30.", result)
+
+    # 31. Сжатие строки
+    s = 'aaabbc'
+    s_result = string_compression(s)
+    print("31.", s_result)
+
+    # 32. Поиск самой длинной подстроки без повторяющихся символов
+    s = 'abcabcbb'
+    result = find_longest_string(s)
+    print("32.", result)
+
+    # 33. Создание маски для пароля
+    s = 'password'
+    s_result = password_mask(s)
+    print("33.", s_result)
+
 
 if __name__ == '__main__':
     main()
