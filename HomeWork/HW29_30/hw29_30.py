@@ -27,6 +27,7 @@ def str_to_key_is_char_value_is_amount(str):
 
     return char_count_dict
 
+
 # 3. Напишите функцию, которая принимает список слов и
 # возвращает словарь, где ключи — это первые буквы слов, а
 # значения — списки слов, начинающихся с этой буквы.
@@ -45,6 +46,7 @@ def group_words_by_first_letter(words_lst):
 
     return letter_dict
 
+
 # 4. Напишите функцию, которая принимает список строк и
 # возвращает словарь, где ключи — это строки, а значения — их
 # длины.
@@ -58,6 +60,7 @@ def get_string_lengths(strings_lst):
     result_dict = {string: len(string) for string in strings_lst}
     return result_dict
 
+
 # 5. Напишите функцию, которая принимает список чисел и
 # возвращает словарь, где ключи — это числа, а значения — True,
 # если число четное, и False, если нечетное.
@@ -68,6 +71,7 @@ def check_even_odd(numbers_lst):
     for num in numbers_lst:
         res_dict[num] = num % 2 == 0
     return res_dict
+
 
 # 6. Напишите функцию, которая принимает словарь и возвращает
 # новый словарь, где ключи и значения поменяны местами.
@@ -81,6 +85,7 @@ def reverse_key_value(lst):
     merge = {value: key for key, value in lst.items()}
     return merge
 
+
 # 7. Напишите функцию, которая принимает словарь и удаляет из
 # него все ключи, значения которых пусты (None, пустая строка,
 # пустой список и т.д.).
@@ -92,6 +97,7 @@ def dict_del_empty(dict):
         if value:
             new_dict[key] = value
     return new_dict
+
 
 # 8. Напишите функцию, которая принимает два словаря и
 # объединяет их, добавляя только уникальные ключи из второго
@@ -107,6 +113,7 @@ def union_uniq(dict1, dict2):
             merge[key] = value
     return merge
 
+
 # 9. Напишите функцию, которая принимает два словаря и
 # возвращает новый словарь, где для каждого ключа значения из
 # обоих словарей суммируются.
@@ -120,6 +127,16 @@ def merge_dict(dict1, dict2):
         else:
             merge[key] = value
     return merge
+
+
+# 10. Напишите функцию, которая принимает два списка
+# одинаковой длины и создает словарь, где элементы первого
+# списка — это ключи, а элементы второго списка — значения.
+# keys = ["a", "b", "c"] values = [1, 2, 3]
+# # Ожидаемый результат: {'a': 1, 'b': 2, 'c': 3}
+def make_dict_from_two_list(keys_lst, values_lst):
+    result_dict = dict(zip(keys_lst, values_lst))
+    return result_dict
 
 
 def main():
@@ -169,6 +186,13 @@ def main():
     dict2 = {'b': 3, 'c': 4}
     result_dict = merge_dict(dict1, dict2)
     print("9.", result_dict)
+
+    # 10.
+    keys = ["a", "b", "c"]
+    values = [1, 2, 3]
+    result_dict = make_dict_from_two_list(keys, values)
+    print("10.", result_dict)
+
 
 if __name__ == '__main__':
     main()
