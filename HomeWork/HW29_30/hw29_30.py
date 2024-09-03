@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 # 1. Напишите функцию, которая принимает список чисел и
 # возвращает словарь, где ключи — это числа, а значения — их
 # кубы.
@@ -139,6 +142,115 @@ def make_dict_from_two_list(keys_lst, values_lst):
     return result_dict
 
 
+# 11. Напишите функцию, которая принимает два словаря и
+# возвращает новый словарь, содержащий только общие ключи с
+# минимальными значениями для каждого ключа.
+# example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
+# # Ожидаемый результат: {'a': 1, 'b': 2, 'e': 3}
+def merge_dict_by_min(dict1, dict2):
+    copy_dict1 = dict1.copy()
+    for key, value in dict2.items():
+        if key in copy_dict1:
+            copy_dict1[key] = min(copy_dict1[key], value)
+        else:
+            copy_dict1[key] = value
+    return copy_dict1
+
+
+# 12. * Напишите функцию, которая принимает список словарей и
+# возвращает один объединенный словарь. Если ключи
+# совпадают, значения суммируются.
+# dicts = [{'a': 1, 'b': 2}, {'a': 2, 'b': 3, 'c': 4}, {'b': 1, 'c': 2}]
+# # Ожидаемый результат: {'a': 3, 'b': 6, 'c': 6}
+def merge_dict_list(dict_lst):
+    merge = {}
+    for dictionary in dict_lst:
+        for key, value in dictionary.items():
+            # if key in merge:
+            #     merge[key] += value
+            # else:
+            #     merge[key] = value
+            merge[key] = merge.get(key, 0) + value
+    return merge
+
+
+# ---------------------------------------------------------------------------------------
+# 1. Напишите функцию, которая принимает словарь и возвращает
+# новый словарь, где ключи — это значения исходного словаря, а
+# значения — списки ключей исходного словаря.
+# example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
+# Ожидаемый результат: {1: ['a', 'c'], 2: ['b', 'd'], 3: ['e']}
+def transform_dict(input_dict):
+    output_dict = {}
+    for key, value in input_dict.items():
+        if value in output_dict:
+            output_dict[value].append(key)
+        else:
+            output_dict[value] = [key]
+    return output_dict
+
+
+# 2. Напишите функцию, которая принимает словарь и возвращает
+# новый словарь, где только уникальные значения.
+# example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 3}
+# # Ожидаемый результат: {'a': 1, 'b': 2, 'd': 3}
+def uniq_dict(input_dict):
+    output_dict = {}
+    for key, value in input_dict.items():
+        if value not in output_dict.values():
+            output_dict[key] = value
+    return output_dict
+
+
+# 3. Напишите функцию, которая принимает список словарей и
+# возвращает один словарь, в котором для каждого ключа
+# выбирается максимальное значение из всех словарей.
+# dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 1, 'c': 4}, {'b': 3, 'c': 2}]
+def dict_max_value(dict_lst):
+    merge = {}
+    for dictionary in dict_lst:
+        for key, value in dictionary.items():
+            if key in merge:
+                merge[key] = max(merge[key], value)
+            else:
+                merge[key] = value
+    return merge
+
+
+# 4. Напишите функцию, которая принимает список словарей и
+# возвращает один словарь, в котором значения каждого ключа
+# объединены в списки.
+# dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 1, 'c': 4}, {'b': 3, 'c': 2}]
+# # Ожидаемый результат: {'a': [1, 3], 'b': [2, 1, 3], 'c': [4, 2]}
+def dict_list_to_value_list(dict_lst):
+    merge = {}
+    for dictionary in dict_lst:
+        for key, value in dictionary.items():
+            if key in merge:
+                merge[key].append(value)
+            else:
+                merge[key] = [value]
+    return merge
+
+
+# 5. Напишите функцию, которая принимает словарь и возвращает новый
+# словарь, где значения заменены на их обратные значения.
+# example_dict = {'a': 1, 'b': 2, 'c': 0.5}
+# Ожидаемый результат: {'a': 1.0, 'b': 0.5, 'c': 2.0}
+def reverse_value_dict(input_dict):
+    # new_dict ={}
+    # for key, value in input_dict.items():
+    #     if key not in new_dict:
+    #         new_dict[key] = 1/value
+    new_dict = {key: 1 / value for key, value in input_dict.items()}
+    return new_dict
+
+# 6. * Напишите функцию, которая принимает список словарей и
+# возвращает один словарь, где значения объединены в списки по
+# общим ключам.
+# dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4, 'c': 5}, {'a': 6, 'c': 7}]
+# # Ожидаемый результат: {'a': [1, 3, 6], 'b': [2, 4], 'c': [5, 7]}
+
 def main():
     # 1.
     nums = [1, 2, 3, 4, 5]
@@ -192,6 +304,47 @@ def main():
     values = [1, 2, 3]
     result_dict = make_dict_from_two_list(keys, values)
     print("10.", result_dict)
+
+    # 11.
+    example_dict1 = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
+    example_dict2 = {'a': 1, 'b': 5, 'e': 7}
+    dict_result = merge_dict_by_min(example_dict1, example_dict2)
+    print(dict_result)
+
+    # 12.
+    dicts = [{'a': 1, 'b': 2}, {'a': 2, 'b': 3, 'c': 4}, {'b': 1, 'c': 2}]
+    result_dict = merge_dict_list(dicts)
+    print(result_dict)
+    # ---------------------------------------------------------------------------------
+    # 1.
+    example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
+    result_dict = transform_dict(example_dict)
+    print(result_dict)
+
+    # 2.
+    example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 3}
+    result_dict = uniq_dict(example_dict)
+    print(result_dict)
+
+    # 3.
+    dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 1, 'c': 4}, {'b': 3, 'c': 2}]
+    result_dict = dict_max_value(dicts)
+    print(result_dict)
+
+    # 4.
+    dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 1, 'c': 4}, {'b': 3, 'c': 2}]
+    result_dict = dict_list_to_value_list(dicts)
+    print(result_dict)
+
+    # 5.
+    example_dict = {'a': 1, 'b': 2, 'c': 0.5}
+    result_dict = reverse_value_dict(example_dict)
+    print(result_dict)
+
+    # 6.
+    dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4, 'c': 5}, {'a': 6, 'c': 7}]
+    result_dict = dict_list_to_value_list(dicts)
+    print(result_dict)
 
 
 if __name__ == '__main__':
