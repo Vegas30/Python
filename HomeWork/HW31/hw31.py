@@ -371,7 +371,7 @@ def string_from_ASCII(lst):
 # Напишите функцию, которая сжимает строку, заменяя последовательные
 # одинаковые символы на символ и количество его повторений.
 # Пример: s = 'aaabbc' → s_result = 'a3b2c1'
-def string_compression(str):
+def string_compression(str: str) -> str:
     new_dict = {}
     for char in str:
         new_dict[char] = new_dict.get(char, 0) + 1
