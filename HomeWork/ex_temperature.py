@@ -17,11 +17,7 @@
 # 12. Отсортировать список температур по возрастанию или убыванию (на
 # основе любого выбранного вами ключа).
 # 13. Подсчитать общее количество дней (элементов) в списке температур.
-import os
-import platform
 import random
-import curses
-import subprocess
 
 
 # 1. Найти индекс первого дня, когда температура превысила заданное значение.
@@ -102,24 +98,28 @@ def all_days_high_level_temp(month, t):
         print("Не Верно, не все дни с температурой выше заданного значения")
 
 
+# 11. Очистить список температур.
+def clear_temperature_list(month):
+    month.clear()
+
+
+# 12. Отсортировать список температур по возрастанию или убыванию (на
+# основе любого выбранного вами ключа).
+
+def sort_list_by_key(month: list[int], selected_key: callable) -> list[int]:
+    sorted_month = sorted(month, key=selected_key)
+    return sorted_month
+
+
+# 13. Подсчитать общее количество дней (элементов) в списке температур.
+def count_days_amount(month: list[int]):
+    days_amount = len(month)
+    return days_amount
+
+
 def month_sort_min_max():
     pass
 
-
-def clear_console():
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    # print("\033[H\033[J")
-    system = platform.system()
-    if system == 'Windows':
-        import subprocess
-        subprocess.call('cls', shell=True)
-    else:
-        print('033c', end='')
-
-def move_cursor_to_top():
-    stdscr = curses.initscr()
-    stdscr.clear()
-    stdscr.refresh()
 
 def print_menu():
     print("\nМеню:")
@@ -189,17 +189,18 @@ def main():
             accept = input(
                 "Внимание основной список температур будет очищен и программа будет завершена, для подтверждения нажмите [y] или любую клавишу для продолжения")
             if accept == 'y':
-                first_month.clear()
+                clear_temperature_list(first_month)
                 print("Температура месяца по дням: ", first_month)
                 break
             else:
                 continue
         elif choice == '12':
-            sorted_month = sorted(first_month, key=abs)
-            print("Температуры сортируются по их абсолютному значению: \n", sorted_month)
+            result = sort_list_by_key(month=first_month, selected_key=abs)
+            print("Температуры сортируются по ключу abs: \n", result)
+
         elif choice == '13':
-            days_amount = len(first_month)
-            print("Общее количество дней (элементов) в списке температур: ", days_amount)
+            result = count_days_amount(month=first_month)
+            print("Общее количество дней (элементов) в списке температур: ", result)
 
         elif choice == '14':
             print("Программа завершена.")
