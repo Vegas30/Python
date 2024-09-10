@@ -20,7 +20,6 @@
 import random
 
 
-
 # 1. Найти индекс первого дня, когда температура превысила заданное значение.
 def first_day_index(month, t):
     for day in month:
