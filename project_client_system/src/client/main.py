@@ -1,10 +1,11 @@
 # src/main.py
-from clients import filter_clients
+from clients import (filter_clients, extract_emails, group_by_tag, average_age_by_tag)
+from report import transform_client_data, generate_report
 
 clients = [
     {'name': 'Alice', 'age': 30, 'email': 'alice@example.com', 'tags': {'VIP', 'newsletter'}},
     {'name': 'Bob', 'age': 24, 'email': 'bob@example.com', 'tags': {'newsletter'}},
-    {'name': 'Charlie', 'age': 35, 'email': 'charlie@example.com', 'tags': {'VIP', 'premium'}},
+    {'name': 'Charlie', 'age': 35, 'tags': {'VIP', 'premium'}},
     {'name': 'David', 'age': 40, 'email': 'david@example.com', 'tags': {'premium'}},
     {'name': 'Eve', 'age': 29, 'email': 'eve@example.com', 'tags': {'newsletter', 'VIP'}}
 ]
@@ -41,11 +42,34 @@ def main():
                 print('\n'.join(filter_client))
                 print(str(filter_client)[1:-1])
             except ValueError as e:
-                print(f"Ошибка введеных данных - {e}")
+                print(f"Ошибка введённых данных - {e}")
 
-        if choice == "7":
+        elif choice == "2":
+            email_clients = extract_emails(clients)
+            print("email's клиентов организации: ")
+            print(*email_clients, sep='\n')
+
+        elif choice == "3":
+            group_tag = group_by_tag(clients)
+            print("VIP: {VIP}\nPremium: {premium}\nNewsletter: {newsletter}".format(**group_tag))
+
+        elif choice == "4":
+            average_age = average_age_by_tag(clients)
+            print("VIP: {VIP}\nPremium: {premium}\nNewsletter: {newsletter}".format(**average_age))
+
+        elif choice == "5":
+            trensform_data = transform_client_data(clients)
+            print(f"Список кортежей (Имяб возраст): {trensform_data}")
+
+        elif choice == "6":
+            str_report = generate_report(clients)
+            print(f"Отчет по клиентам:\n{str_report}")
+
+        elif choice == "7":
+            print("Выход")
             break
-
+        else:
+            print("Некорректный выбор действия")
 
 if __name__ == '__main__':
     main()
