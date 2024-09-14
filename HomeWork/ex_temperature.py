@@ -20,8 +20,18 @@
 import random
 
 
+# Проверка на корректный ввод
+def validate_input_number(input_str: str) -> int:
+    while True:
+        try:
+            number = int(input(input_str))
+            return number
+        except ValueError:
+            print("Некорректный ввод. Введите число.")
+
+
 # 1. Найти индекс первого дня, когда температура превысила заданное значение.
-def first_day_index(month, t):
+def first_day_index(month: list[int], t: int) -> int:
     for day in month:
         if day > t:
             index_of_day = month.index(day)
@@ -29,7 +39,7 @@ def first_day_index(month, t):
 
 
 # 2. Найти индекс последнего дня, когда температура не превышала заданное значение.
-def last_day_index(month, t):
+def last_day_index(month: list[int], t: int) -> int:
     reversed_month = month[::-1]
     for day in reversed_month:
         if day < t:
@@ -38,19 +48,19 @@ def last_day_index(month, t):
 
 
 # 3. Подсчитать количество дней, когда температура была ниже заданного значения.
-def low_tmp_days_amount(month, t):
+def low_tmp_days_amount(month: list[int], t: int) -> int:
     result = sum(list(filter(lambda x: t > x, month)))
     return result
 
 
 # 4. Добавить в список температур еще один список температур за последние несколько дней месяца.
-def add_few_days(month, n):
+def add_few_days(month: list[int], n: int) -> list[int]:
     new_array = month + month[n:]
     return new_array
 
 
 # 5. Удалить температуру последнего дня из списка.
-def del_last_day(month):
+def del_last_day(month: list[int]) -> list[int]:
     new_array = month[:]
     new_array.pop()
     return new_array
@@ -59,31 +69,31 @@ def del_last_day(month):
 # 6. Объединить два списка температур, представляющих собой данные двух разных месяцев.
 
 # Создаем второй месяц и заполняем его случайными температурами с заданным диапазоном
-def make_second_month(n, m):
-    new_month = [random.randint(n, m) for _ in range(31)]
-    return new_month
+def make_second_month(n: int, m: int) -> list[int]:
+    second_month = [random.randint(n, m) for _ in range(31)]
+    return second_month
 
 
-def join_two_month(first_month, second_month):
+def join_two_month(first_month: list[int], second_month: list[int]) -> list[int]:
     result_array = first_month.extend(second_month)
     return result_array
 
 
 # 7. Отфильтровать список, оставив только температуры, превышающие заданное значение.
-def high_temp_filter(month, t):
+def high_temp_filter(month: list[int], t: int) -> list[int]:
     new_array = list(filter(lambda x: t < x, month))
     return new_array
 
 
 # 8. Преобразовать список температур из Цельсия в Фаренгейты.
-def celsius_to_fahrenheit(month):
+def celsius_to_fahrenheit(month: list[int]) -> list[float]:
     # (100 °C × 9/5) + 32 = 212 °F
     temp_in_fahrenheit = [celsius * 1.8 for celsius in month]
     return temp_in_fahrenheit
 
 
 # 9. Проверить, был ли хотя бы один день с температурой выше заданного значения.
-def any_day_high_level_temp(month, t):
+def any_day_high_level_temp(month: list[int], t: int):
     if any(list(filter(lambda x: x > t, month))):
         print("Верно, был хотя бы один день с температурой выше заданного значения")
     else:
@@ -91,7 +101,7 @@ def any_day_high_level_temp(month, t):
 
 
 # 10. Проверить, были ли все дни с температурой выше заданного значения.
-def all_days_high_level_temp(month, t):
+def all_days_high_level_temp(month: list[int], t: int):
     if all(list(filter(lambda x: x > t, month))):
         print("Верно, все дни с температурой выше заданного значения")
     else:
@@ -99,7 +109,7 @@ def all_days_high_level_temp(month, t):
 
 
 # 11. Очистить список температур.
-def clear_temperature_list(month):
+def clear_temperature_list(month: list[int]):
     month.clear()
 
 
@@ -112,7 +122,7 @@ def sort_list_by_key(month: list[int], selected_key: callable) -> list[int]:
 
 
 # 13. Подсчитать общее количество дней (элементов) в списке температур.
-def count_days_amount(month: list[int]):
+def count_days_amount(month: list[int]) -> int:
     days_amount = len(month)
     return days_amount
 
@@ -146,19 +156,19 @@ def main():
         print_menu()
         choice = input("Выберите действие от 1 до 14: ")
         if choice == '1':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             index_of_first_day = first_day_index(first_month, t)
             print(f"Индекс первого дня, когда температура превысила заданное значение: {index_of_first_day}")
         elif choice == '2':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             index_of_last_day = last_day_index(first_month, t)
             print(f"Индекс последнего дня, когда температура не превышала заданное значение.: {index_of_last_day}")
         elif choice == '3':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             index_of_last_day = low_tmp_days_amount(first_month, t)
             print(f"Индекс последнего дня, когда температура не превышала заданное значение.: {index_of_last_day}")
         elif choice == '4':
-            n = int(input("Введите количество дней для добавления: "))
+            n = validate_input_number("Введите количество дней для добавления: ")
             result_array = add_few_days(first_month, n)
             print(f"Список температур с добавленными днями.: {result_array}")
         elif choice == '5':
@@ -171,18 +181,18 @@ def main():
             print(
                 f"Новый список после объединения двух списков температур, представляющих собой данные двух разных месяцев: {new_array_of_two_month}")
         elif choice == '7':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             result_array = high_temp_filter(first_month, t)
             print(f"Отфильтрованный список, с температурами, превышающими заданное значение.: {result_array}")
         elif choice == '8':
-            t = int(input("Введите значение температуры: "))
-            result_array = high_temp_filter(first_month, t)
+            t = validate_input_number("Введите значение температуры: ")
+            result_array = celsius_to_fahrenheit(first_month)
             print(f"Преобразовать список температур из Цельсия в Фаренгейты.: {result_array}")
         elif choice == '9':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             any_day_high_level_temp(first_month, t)
         elif choice == '10':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             all_days_high_level_temp(first_month, t)
         elif choice == '11':
             print("Температура месяца по дням: ", first_month)
