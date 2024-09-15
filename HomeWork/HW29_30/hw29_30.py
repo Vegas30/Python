@@ -245,11 +245,132 @@ def reverse_value_dict(input_dict):
     new_dict = {key: 1 / value for key, value in input_dict.items()}
     return new_dict
 
+
 # 6. * Напишите функцию, которая принимает список словарей и
 # возвращает один словарь, где значения объединены в списки по
 # общим ключам.
 # dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4, 'c': 5}, {'a': 6, 'c': 7}]
 # # Ожидаемый результат: {'a': [1, 3, 6], 'b': [2, 4], 'c': [5, 7]}
+
+def merge_dicts(list_dicts):
+    merged_dict = {}
+    for dictionary in list_dicts:
+        for key, value in dictionary.items():
+            if key in merged_dict:
+                merged_dict[key].append(value)
+            else:
+                merged_dict[key] = value
+    return merged_dict
+
+
+# 7. !! Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценках по предметам, и
+# возвращает словарь, где ключи — названия предметов, а
+# значения — средние оценки по этим предметам.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# Ожидаемый результат: {'math': 85.0, 'science': 85.0}
+def calculate_average_grades(list_dicts):
+    subject_grades = {}
+    subject_counts = {}
+    for student in list_dicts:
+        for subject, grade in student['grades'].items():
+            if subject in subject_grades:
+                subject_grades[subject] += grade
+                subject_counts[subject] += 1
+            else:
+                subject_grades[subject] = grade
+                subject_counts[subject] = 1
+    average_grades = {subject: total_grades / subject_counts[subject] for subject, total_grades in
+                      subject_grades.items()}
+    return average_grades
+
+
+# 8. Напишите функцию, которая принимает список словарей с информацией о студентах и их оценках по предметам,
+# и возвращает словарь, где ключи — названия предметов, а значения — имена студентов
+# с наивысшими оценками по этим предметам.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# Ожидаемый результат: {'math': 'Alice', 'science': 'Bob'}
+def get_top_students(list_dict):
+    top_students = {}
+    for student in list_dict:
+        for subject, grade in student['grades'].items():
+            if subject in top_students:
+                if grade > student['grades'][subject]:
+                    top_students[subject] = student['name']
+            else:
+                top_students[subject] = student['name']
+    return top_students
+
+
+# 9. Напишите функцию, которая принимает список словарей с информацией о студентах и их оценками по предметам, и
+# возвращает список имён студентов, у которых хотя бы по одному предмету оценка выше заданного порога.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# threshold = 85
+# # Ожидаемый результат: ['Alice', 'Bob']
+def get_students_above_threshold(list_dict: list[dict: str, any], threshold) -> list:
+    above_threshold_students = []
+    for student in list_dict:
+        for grade in student['grades'].values():
+            if grade > threshold:
+                above_threshold_students.append(student['name'])
+                break
+    return above_threshold_students
+
+
+# 10. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками по предметам, и
+# возвращает словарь, где ключи — имена студентов, а значения
+# — их средние оценки.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: {'Alice': 87.5, 'Bob': 85.0, 'Charlie': 82.5}
+# (РЕШИТЬ ЧЕРЕЗ ВКЛЮЧЕНИЯ)
+def student_average_grades(list_dict: list[dict[str, any]]) -> dict[str, float]:
+    # student_average_grades_dict = {}
+    # for student in list_dict:
+    #     total_grades = sum(student['grades'].values())
+    #     average_grade = total_grades / len(student['grades'])
+    #     student_average_grades_dict[student['name']] = average_grade
+    student_average_grades_dict = {
+        student['name']: sum(student['grades'].values()) / len(student['grades']) for student in
+        list_dict}
+    return student_average_grades_dict
+
+
+# 11. Напишите функцию, которая принимает список словарей с информацией о студентах и их оценками по предметам, и
+# возвращает словарь, где ключи — названия предметов, а значения — списки студентов, получивших заданную оценку по
+# этому предмету.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ] specific_grade = 85
+# # Ожидаемый результат: {'science': ['Alice'], 'math': ['Charlie']}
+def get_students_with_specific_grade(students: list[dict[str, any]], specific_grade: int) -> dict[str, list[str]]:
+    students_with_specific_grade = {}
+    for student in students:
+        for subject, grade in student['grades'].items():
+            if grade == specific_grade:
+                if subject in students_with_specific_grade:
+                    students_with_specific_grade[subject].append(student['name'])
+                else:
+                    students_with_specific_grade[subject] = student['name']
+    return students_with_specific_grade
+
+# 12. Напишите функцию, которая принимает список словарей с информацией о студентах и их оценками по предметам, и
+# возвращает словарь, где ключи — названия предметов, а значения — словари с минимальной, максимальной и средней
+# оценкой по каждому предмету.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: {'math': {'min': 80, 'max': 90, 'average':
+# 85.0}, 'science': {'min': 80, 'max': 90, 'average': 85.0}}
+
 
 def main():
     # 1.
@@ -344,6 +465,53 @@ def main():
     # 6.
     dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4, 'c': 5}, {'a': 6, 'c': 7}]
     result_dict = dict_list_to_value_list(dicts)
+    print(result_dict)
+
+    # 7.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result_dict = calculate_average_grades(students)
+    print(result_dict)
+
+    # 8.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result_dict = get_top_students(students)
+    print(result_dict)
+
+    # 9.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    threshold = 85
+    result_dict = get_students_above_threshold(students, threshold)
+    print(result_dict)
+
+    # 10.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result_dict = student_average_grades(students)
+    print(result_dict)
+
+    # 11.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    specific_grade = 85
+    result_dict = get_students_with_specific_grade(students, specific_grade)
     print(result_dict)
 
 
