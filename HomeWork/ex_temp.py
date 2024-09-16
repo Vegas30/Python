@@ -1,5 +1,12 @@
 # 1. Найти индекс первого дня, когда температура превысила заданное значение.
 def first_day_index(month, t):
+    """
+    Функция находит
+
+    :param month:
+    :param t:
+    :return:
+    """
     for day in month:
         if day > t:
             index_of_day = month.index(day)

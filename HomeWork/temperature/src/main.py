@@ -1,5 +1,31 @@
+# src/main.py
+import random
+from analitic.analitics import (
+    high_temp_filter,
+    count_days_amount,
+    last_day_index,
+    first_day_index,
+    low_tmp_days_amount,
+    any_day_high_level_temp,
+    all_days_high_level_temp,
+    sort_list_by_key
+)
+from modific.modification import (
+    del_last_day,
+    add_few_days,
+    clear_temperature_list,
+    join_two_month,
+    make_second_month,
+    celsius_to_fahrenheit
+)
+from valid.validation import validate_input_number
+
 
 def print_menu():
+    """
+    Функция меню
+
+    """
     print("\nМеню:")
     print("1. Найти индекс первого дня, когда температура превысила заданное значение.")
     print("2. Найти индекс последнего дня, когда температура не превышала заданное значение.")
@@ -18,25 +44,29 @@ def print_menu():
 
 
 def main():
+    """
+    Основная функция для запуска консольного приложения.
+
+    """
     first_month = [random.randint(-2, 7) for _ in range(30)]
     while True:
         print("\nТемпература по дням: ", first_month)
         print_menu()
         choice = input("Выберите действие от 1 до 14: ")
         if choice == '1':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             index_of_first_day = first_day_index(first_month, t)
             print(f"Индекс первого дня, когда температура превысила заданное значение: {index_of_first_day}")
         elif choice == '2':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             index_of_last_day = last_day_index(first_month, t)
             print(f"Индекс последнего дня, когда температура не превышала заданное значение.: {index_of_last_day}")
         elif choice == '3':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             index_of_last_day = low_tmp_days_amount(first_month, t)
             print(f"Индекс последнего дня, когда температура не превышала заданное значение.: {index_of_last_day}")
         elif choice == '4':
-            n = int(input("Введите количество дней для добавления: "))
+            n = validate_input_number("Введите количество дней для добавления: ")
             result_array = add_few_days(first_month, n)
             print(f"Список температур с добавленными днями.: {result_array}")
         elif choice == '5':
@@ -49,23 +79,22 @@ def main():
             print(
                 f"Новый список после объединения двух списков температур, представляющих собой данные двух разных месяцев: {new_array_of_two_month}")
         elif choice == '7':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             result_array = high_temp_filter(first_month, t)
             print(f"Отфильтрованный список, с температурами, превышающими заданное значение.: {result_array}")
         elif choice == '8':
-            t = int(input("Введите значение температуры: "))
-            result_array = high_temp_filter(first_month, t)
+            result_array = celsius_to_fahrenheit(first_month)
             print(f"Преобразовать список температур из Цельсия в Фаренгейты.: {result_array}")
         elif choice == '9':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             any_day_high_level_temp(first_month, t)
         elif choice == '10':
-            t = int(input("Введите значение температуры: "))
+            t = validate_input_number("Введите значение температуры: ")
             all_days_high_level_temp(first_month, t)
         elif choice == '11':
             print("Температура месяца по дням: ", first_month)
             accept = input(
-                "Внимание основной список температур будет очищен и программа будет завершена, для подтверждения нажмите [y] или любую клавишу для продолжения")
+                "Внимание основной список температур будет очищен и программа будет завершена, для подтверждения нажмите [y] или любую клавишу для продолжения ")
             if accept == 'y':
                 clear_temperature_list(first_month)
                 print("Температура месяца по дням: ", first_month)

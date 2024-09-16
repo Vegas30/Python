@@ -4,12 +4,26 @@ import random
 
 # 4. Добавить в список температур еще один список температур за последние несколько дней месяца.
 def add_few_days(month: list[int], n: int) -> list[int]:
-    new_array = month + month[n:]
+    """
+    Функция добавляет в список температур еще один список температур за последние несколько дней месяца.
+
+    :param month: Список чисел, представляющих собой дневные температуры.
+    :param n: Количество дней месяца
+    :return: Обновленный список температур с добавленными температурами за последние (n) дней месяца.
+    """
+
+    new_array = month + month[-n:]
     return new_array
 
 
 # 5. Удалить температуру последнего дня из списка.
 def del_last_day(month: list[int]) -> list[int]:
+    """
+    Функция удаляет температуру последнего дня из списка.
+
+    :param month: Список чисел, представляющих собой дневные температуры.
+    :return: Список чисел, представляющих собой дневные температуры с удаленной температурой последнего дня.
+    """
     new_array = month[:]
     new_array.pop()
     return new_array
@@ -19,17 +33,38 @@ def del_last_day(month: list[int]) -> list[int]:
 
 # Создаем второй месяц и заполняем его случайными температурами с заданным диапазоном
 def make_second_month(n: int, m: int) -> list[int]:
+    """
+    Функция создает второй месяц и заполняет его случайными температурами с заданным диапазоном.
+
+    :param n: Диапазон температур от минимальной n
+    :param m: Диапазон температур до максимальной m
+    :return: Список температур, второй месяц для объединения с первым
+    """
     second_month = [random.randint(n, m) for _ in range(31)]
     return second_month
 
 
 def join_two_month(first_month: list[int], second_month: list[int]) -> list[int]:
-    result_array = first_month.extend(second_month)
-    return result_array
+    """
+    Функция объединяет два списка температур, представляющих собой данные двух разных месяцев.
+
+    :param first_month: Список чисел, представляющих собой дневные температуры, первый месяц.
+    :param second_month: Список чисел, представляющих собой дневные температуры, второй месяц.
+    :return: Объединенный список температур
+    """
+    new_first_month = first_month.copy()
+    new_first_month.extend(second_month)
+    return new_first_month
 
 
 # 8. Преобразовать список температур из Цельсия в Фаренгейты.
 def celsius_to_fahrenheit(month: list[int]) -> list[float]:
+    """
+    Функция преобразовывает список температур из Цельсия в Фаренгейты.
+
+    :param month: Список чисел, представляющих собой дневные температуры в градусах Цельсия
+    :return: Список чисел, представляющих собой дневные температуры в Фаренгейтах.
+    """
     # (100 °C × 9/5) + 32 = 212 °F
     temp_in_fahrenheit = [celsius * 1.8 for celsius in month]
     return temp_in_fahrenheit
@@ -37,4 +72,10 @@ def celsius_to_fahrenheit(month: list[int]) -> list[float]:
 
 # 11. Очистить список температур.
 def clear_temperature_list(month: list[int]):
+    """
+    Функция очищает список температур.
+
+    :param month: Список чисел, представляющих собой дневные температуры.
+    :return: Функция ни чего не возвращает, работает на месте.
+    """
     month.clear()
