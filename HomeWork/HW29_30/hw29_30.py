@@ -362,6 +362,7 @@ def get_students_with_specific_grade(students: list[dict[str, any]], specific_gr
                     students_with_specific_grade[subject] = student['name']
     return students_with_specific_grade
 
+
 # 12. Напишите функцию, которая принимает список словарей с информацией о студентах и их оценками по предметам, и
 # возвращает словарь, где ключи — названия предметов, а значения — словари с минимальной, максимальной и средней
 # оценкой по каждому предмету.
@@ -370,6 +371,42 @@ def get_students_with_specific_grade(students: list[dict[str, any]], specific_gr
 # 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
 # # Ожидаемый результат: {'math': {'min': 80, 'max': 90, 'average':
 # 85.0}, 'science': {'min': 80, 'max': 90, 'average': 85.0}}
+def calculate_grades_summary(students: list[dict[str, any]]) -> dict[str, dict[str, float]]:
+    subjects = set()
+    grades_summary = {}
+    for student in students:
+        for subject, grade in student['grades'].items():
+            subjects.add(subject)
+            if subject not in grades_summary:
+                grades_summary[subject] = {'min': grade, 'max': grade, 'sum': grade, 'count': 1}
+            else:
+                grades_summary[subject]['min'] = min(grades_summary[subject]['min'], grade)
+                grades_summary[subject]['max'] = max(grades_summary[subject]['max'], grade)
+                grades_summary[subject]['sum'] = grades_summary[subject]['sum'] + grade
+                grades_summary[subject]['count'] = grades_summary[subject]['count'] + 1
+
+    for subject in subjects:
+        grades_summary[subject]['average'] = grades_summary[subject]['sum'] / grades_summary[subject]['count']
+        grades_summary[subject].pop('sum')
+        grades_summary[subject].pop('count')
+
+    return grades_summary
+
+
+# 13. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками по предметам, и
+# возвращает список имён студентов, которые получили
+# одинаковые оценки по всем предметам.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 90}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 80}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: ['Alice', 'Bob']
+def find_students_with_same_grades(students: list[dict[str, any]]) -> list[str]:
+    same_grades_students = []
+    for student in students:
+        if student['grades']['math'] == student['grades']['science']:
+            same_grades_students.append(student['name'])
+    return same_grades_students
 
 
 def main():
@@ -437,6 +474,7 @@ def main():
     result_dict = merge_dict_list(dicts)
     print(result_dict)
     # ---------------------------------------------------------------------------------
+
     # 1.
     example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
     result_dict = transform_dict(example_dict)
@@ -513,6 +551,24 @@ def main():
     specific_grade = 85
     result_dict = get_students_with_specific_grade(students, specific_grade)
     print(result_dict)
+
+    # 12.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result_dict = calculate_grades_summary(students)
+    print(result_dict)
+
+    # 13.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 90}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 80}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result_list = find_students_with_same_grades(students)
+    print(result_list)
 
 
 if __name__ == '__main__':
