@@ -18,7 +18,6 @@ def read_first_n_lines_z4(n: int) -> None:
             print(file.readline())
 
 
-
 def copy_file_z3(filename: str, filename2: str) -> None:
     with open(filename, 'r', encoding='utf-8') as file:
         content = file.read()
