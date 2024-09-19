@@ -13,7 +13,8 @@ def remove_empty_lines(source_file, new_file):
     # with open(source_file, 'r+', encoding="utf-8") as file:
     #     file.seek(10, 2)
 
-#
+
+
 def main():
     source_name = 'source.txt'
     new_file = 'copy_source.txt'
