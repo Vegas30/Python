@@ -1,4 +1,5 @@
 # Напишите функцию которая удаляет все пустые строки из файла и записывает результат в новый файл.
+import os
 
 def remove_empty_lines(source_file, new_file):
     # with open('source.txt', 'r', encoding="utf-8") as file:
@@ -19,6 +20,8 @@ def main():
     source_name = 'source.txt'
     new_file = 'copy_source.txt'
     remove_empty_lines(source_name, new_file)
+    print(f"{5:x}")
+
 
 if __name__ == '__main__':
     try:
