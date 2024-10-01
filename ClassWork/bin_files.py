@@ -64,6 +64,7 @@ def read_client_to_file(filename: str) -> list[dict]:
             clients.append(client)
     return clients
 
+
 def write_client_to_json(clients: list[dict], json_filename: str) -> None:
     data = {'clients': clients}
     with open(json_filename, 'w', encoding='utf-8') as file:
@@ -73,6 +74,7 @@ def load_clients_to_json(json_filename: str) -> None:
     with open(json_filename, 'r', encoding='utf-8') as file:
         data = json.load(file)
     print(data)
+
 def main():
     input_filename = 'client.txt'
     output_filename = 'client.json'
