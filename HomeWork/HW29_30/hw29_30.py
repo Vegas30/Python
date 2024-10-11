@@ -363,8 +363,9 @@ def get_students_with_specific_grade(students: list[dict[str, any]], specific_gr
     return students_with_specific_grade
 
 
-# 12. Напишите функцию, которая принимает список словарей с информацией о студентах и их оценками по предметам, и
-# возвращает словарь, где ключи — названия предметов, а значения — словари с минимальной, максимальной и средней
+# 12. Напишите функцию, которая принимает список словарей с информацией о студентах
+# и их оценками по предметам, и возвращает словарь, где ключи — названия предметов,
+# а значения — словари с минимальной, максимальной и средней
 # оценкой по каждому предмету.
 # students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
 # {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
@@ -407,6 +408,109 @@ def find_students_with_same_grades(students: list[dict[str, any]]) -> list[str]:
         if student['grades']['math'] == student['grades']['science']:
             same_grades_students.append(student['name'])
     return same_grades_students
+
+
+# 14. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками по предметам, и
+# возвращает имя студента с наименьшей суммой оценок.
+# students = [
+# {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 70}},
+# {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: 'Bob'
+def student_with_min_total_grade(students):
+    min_total_grade = float('inf')
+    student_with_min_grade = ''
+    for student in students:
+        total_grade = sum(student['grades'].values())
+        if total_grade < min_total_grade:
+            min_total_grade = total_grade
+            student_with_min_grade = student['name']
+
+    return student_with_min_grade
+
+
+# 15. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками по предметам, и
+# возвращает список имён студентов, у которых все оценки выше
+# среднего значения по всем предметам.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 70}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: ['Alice']
+def students_above_average(students):
+    all_grades = []
+    for student in students:
+        all_grades.extend(student['grades'].values())
+
+    average_grade = sum(all_grades) / len(all_grades)
+
+    student_list = []
+    for student in students:
+        if all(grade > average_grade for grade in student['grades'].values()):
+            student_list.append(student['name'])
+    return student_list
+
+
+# 16. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками по предметам, и
+# возвращает сводную таблицу в виде словаря, где ключи —
+# названия предметов, а значения — словари, в которых ключи —
+# имена студентов, а значения — их оценки.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 70}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: {'math': {'Alice': 90, 'Bob': 80, 'Charlie':
+# 85}, 'science': {'Alice': 85, 'Bob': 70, 'Charlie': 80}}
+def create_summary_table(students):
+    summary_table = {}
+    for student in students:
+        for subject, grade in student['grades'].items():
+            if subject not in summary_table:
+                summary_table[subject] = {}
+            summary_table[subject][student['name']] = grade
+
+    return summary_table
+
+
+# 17. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками, и возвращает словарь,
+# где ключи — предметы, а значения — общие суммы оценок по
+# каждому предмету.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: {'math': 255, 'science': 255}
+def calculate_total_grades(students):
+    total_grades = {}
+    for student in students:
+        for subject, grade in student['grades'].items():
+            # if subject not in total_grades:
+            #     total_grades[subject] = 0
+            # total_grades[subject] += grade
+            total_grades[subject] = total_grades.get(subject, 0) + grade
+    return total_grades
+
+
+# 18. Напишите функцию, которая принимает список словарей с
+# информацией о студентах и их оценками, и возвращает словарь,
+# где ключи — предметы, а значения — кортежи с минимальной и
+# максимальной оценками по каждому предмету.
+# students = [ {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+# {'name': 'Bob', 'grades': {'math': 80, 'science': 90}}, {'name':
+# 'Charlie', 'grades': {'math': 85, 'science': 80}} ]
+# # Ожидаемый результат: {'math': (80, 90), 'science': (80, 90)}
+def calculate_min_max_grades(students):
+    min_max_grades = {}
+    for student in students:
+        for subject, grade in student['grades'].items():
+            if subject not in min_max_grades:
+                min_max_grades[subject] = (grade, grade)
+            else:
+                current_min, current_max = min_max_grades[subject]
+                min_max_grades[subject] = (min(current_min, grade)), (max(current_max, grade))
+
+    return min_max_grades
 
 
 def main():
@@ -467,43 +571,43 @@ def main():
     example_dict1 = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
     example_dict2 = {'a': 1, 'b': 5, 'e': 7}
     dict_result = merge_dict_by_min(example_dict1, example_dict2)
-    print(dict_result)
+    print("11.", dict_result)
 
     # 12.
     dicts = [{'a': 1, 'b': 2}, {'a': 2, 'b': 3, 'c': 4}, {'b': 1, 'c': 2}]
     result_dict = merge_dict_list(dicts)
-    print(result_dict)
+    print("12.", result_dict)
     # ---------------------------------------------------------------------------------
 
     # 1.
     example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 2, 'e': 3}
     result_dict = transform_dict(example_dict)
-    print(result_dict)
+    print("1.", result_dict)
 
     # 2.
     example_dict = {'a': 1, 'b': 2, 'c': 1, 'd': 3}
     result_dict = uniq_dict(example_dict)
-    print(result_dict)
+    print("2.", result_dict)
 
     # 3.
     dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 1, 'c': 4}, {'b': 3, 'c': 2}]
     result_dict = dict_max_value(dicts)
-    print(result_dict)
+    print("3.", result_dict)
 
     # 4.
     dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 1, 'c': 4}, {'b': 3, 'c': 2}]
     result_dict = dict_list_to_value_list(dicts)
-    print(result_dict)
+    print("4.", result_dict)
 
     # 5.
     example_dict = {'a': 1, 'b': 2, 'c': 0.5}
     result_dict = reverse_value_dict(example_dict)
-    print(result_dict)
+    print("5.", result_dict)
 
     # 6.
     dicts = [{'a': 1, 'b': 2}, {'a': 3, 'b': 4, 'c': 5}, {'a': 6, 'c': 7}]
     result_dict = dict_list_to_value_list(dicts)
-    print(result_dict)
+    print("6.", result_dict)
 
     # 7.
     students = [
@@ -512,7 +616,7 @@ def main():
         {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
     ]
     result_dict = calculate_average_grades(students)
-    print(result_dict)
+    print("7.", result_dict)
 
     # 8.
     students = [
@@ -521,7 +625,7 @@ def main():
         {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
     ]
     result_dict = get_top_students(students)
-    print(result_dict)
+    print("8.", result_dict)
 
     # 9.
     students = [
@@ -531,7 +635,7 @@ def main():
     ]
     threshold = 85
     result_dict = get_students_above_threshold(students, threshold)
-    print(result_dict)
+    print("9.", result_dict)
 
     # 10.
     students = [
@@ -540,7 +644,7 @@ def main():
         {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
     ]
     result_dict = student_average_grades(students)
-    print(result_dict)
+    print("10.", result_dict)
 
     # 11.
     students = [
@@ -550,7 +654,7 @@ def main():
     ]
     specific_grade = 85
     result_dict = get_students_with_specific_grade(students, specific_grade)
-    print(result_dict)
+    print("11.", result_dict)
 
     # 12.
     students = [
@@ -559,7 +663,7 @@ def main():
         {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
     ]
     result_dict = calculate_grades_summary(students)
-    print(result_dict)
+    print("12.", result_dict)
 
     # 13.
     students = [
@@ -568,7 +672,54 @@ def main():
         {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
     ]
     result_list = find_students_with_same_grades(students)
-    print(result_list)
+    print("13.", result_list)
+
+    # 14.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 70}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result = student_with_min_total_grade(students)
+    print("14.", result)
+
+    # 15.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 70}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result = students_above_average(students)
+    print("15.", result)
+
+    # 16.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 70}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result = create_summary_table(students)
+    print("16.", result)
+
+    # 17.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+    result = calculate_total_grades(students)
+    print("17.", result)
+
+    # 18.
+    students = [
+        {'name': 'Alice', 'grades': {'math': 90, 'science': 85}},
+        {'name': 'Bob', 'grades': {'math': 80, 'science': 90}},
+        {'name': 'Charlie', 'grades': {'math': 85, 'science': 80}}
+    ]
+
+    # Вызов функции и вывод результата
+    result = calculate_min_max_grades(students)
+    print("18.", result)
 
 
 if __name__ == '__main__':
