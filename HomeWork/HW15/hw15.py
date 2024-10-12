@@ -115,6 +115,65 @@ def count_0_and_5(number):
     return count
 
 
+# 6.24. Дана непустая последовательность целых чисел,
+# оканчивающаяся нулем. Найти:
+# а) сумму всех чисел последовательности, больших числа x;
+def sum_greater_than_x(sequence, x):
+    # summa = sum(num for num in sequence if num > x)
+    summa = 0
+    for num in sequence:
+        if num > x:
+            summa += num
+    return summa
+
+
+# б) количество всех четных чисел последовательности.
+def count_even_numbers(sequence, x):
+    # count = sum(1 for num in sequence if num % 2 == 0)
+    count = 0
+    for num in sequence:
+        if num % 2 == 0:
+            count += 1
+    return count
+
+
+# 6.27. Дано натуральное число.
+# а) Определить его максимальную и минимальную цифры.
+def min_max_digit(number):
+    min_digit = 9
+    max_digit = 0
+    for digit in str(number):
+        if int(digit) < min_digit:
+            min_digit = int(digit)
+        if int(digit) > max_digit:
+            max_digit = int(digit)
+
+    return min_digit, max_digit
+
+
+# б) Определить, на сколько его максимальная цифра превышает
+# минимальную.
+def diff_max_min(min_dig, max_dig):
+    if min_dig < max_dig:
+        return max_dig - min_dig
+
+
+# в) Найти сумму его максимальной и минимальной цифр.
+def sum_min_max(min_dig, max_dig):
+    return min_dig + max_dig
+
+def get_natural_number(text):
+    while True:
+        try:
+            number = int(input(text))
+            if number > 0:
+                return number
+            # else:
+            #     print(text)
+        except ValueError as e:
+            print(f"Ошибка! {text}", e)
+
+
 def main():
     # 6.9.
     result = find_next_number(24)
@@ -126,7 +185,8 @@ def main():
     result = find_first_square_greater_than_n(42)
     print("\n№ 6.10 б)", result)
     # 6.21. а)
-    n = int(input("Введите значение n (n > 1): "))
+    text = "Введите значение n (n > 1): "
+    n = get_natural_number(text)
     result = find_first_fibonacci_number_greater_than_n(n)
     print("№ 6.21 а)", result)
     # 6.21. б)
@@ -134,7 +194,8 @@ def main():
     result = sum_fibonacci_numbers_not_exceeding_limit(limit)
     print("№ 6.21 б)", result)
     # 6.22. а)
-    number = int(input("Введите натуральное число: "))
+    text = "Введите натуральное число: "
+    number = get_natural_number(text)
     result = count_num_3(number)
     print("№ 6.22 а)", result)
     # 6.22. б)
@@ -152,6 +213,25 @@ def main():
     # 6.22. е)
     result = count_0_and_5(number)
     print("№ 6.22 е)", result)
+    # 6.24. а)
+    sequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    x = 3
+    result = sum_greater_than_x(sequence, x)
+    print("№ 6.24 а)", result)
+    # 6.24. б)
+    result = count_even_numbers(sequence, x)
+    print("№ 6.24 б)", result)
+    # 6.27. а)
+    number = 987654321
+    min_dig, max_dig = min_max_digit(number)
+    print(f"№ 6.27 а) Минимальная цифра: {min_dig}, максимальная цифра: {max_dig}")
+    # 6.27. б)
+    result = diff_max_min(min_dig, max_dig)
+    print(f"№ 6.27 б) Максимальная цифра: {max_dig} превышает минимальную цифру: {min_dig} на {result}")
+    # 6.27. в)
+    result = sum_min_max(min_dig, max_dig)
+    print(f"№ 6.27 в) Сумма максимальной цифры: {max_dig} и минимальной цифры: {min_dig} равна {result}")
+
 
 if __name__ == '__main__':
     main()
