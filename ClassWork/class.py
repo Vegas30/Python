@@ -64,4 +64,7 @@ def main():
 
     print(f"Курсы на которая учится {student1.name} - {student1.get_courses()}")
     print(f"Cтуденты курса {course_math.name} - {course_math.get_students()}")
-main()
+
+if __name__ == '__main__':
+
+    main()
