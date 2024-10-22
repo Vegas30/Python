@@ -140,6 +140,7 @@ class Employee:
         return f"Сотрудник {self.name} стал зарабатывать {self.salary}"
 
 
+
 def main():
     s1 = Employee("Максим", 4800)
     s2 = Employee("Максим (по черному рынку)", 999999999)
