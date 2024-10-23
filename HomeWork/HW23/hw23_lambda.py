@@ -1,7 +1,5 @@
 # 1. Создайте список всех чисел от 1 до 30 включительно, которые
 # делятся на 3.
-from functools import reduce
-
 result_list = [num for num in range(1, 31) if num % 3 == 0]
 print("1.", result_list)
 # 2. Создайте список цифр числа 12345.
