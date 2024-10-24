@@ -207,10 +207,10 @@ class Fibonacci:
 
 
 def main():
+    fib = Fibonacci(5)
+    for num in fib:
+        print(num)  # 0 1 1 2 3
 
-# fib = Fibonacci(5)
-# for num in fib:
-#     print(num)  # 0 1 1 2 3
 
 if __name__ == '__main__':
     main()
