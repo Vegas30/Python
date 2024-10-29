@@ -155,8 +155,8 @@ if __name__ == '__main__':
 # в виде строки.
 # Пример использования:
 # p = Polynomial([3, 0, 2]) # 3x^2 + 0x + 2
-# print(p[2]) # 3 (коэффициент при x^2)
-# print(p[0]) # 2 (коэффициент при x^0)
+# print(p[0]) # 3 (коэффициент при x^2)
+# print(p[2]) # 2 (коэффициент при x^0)
 
 class Polynomial:
     def __init__(self, ratio_list):
@@ -167,6 +167,16 @@ class Polynomial:
             return self.ratio_list[index]
         else:
             return 0
+
+    def __repr__(self):
+        terms = []
+        for i, coeff in enumerate(self.ratio_list):
+            if coeff != 0:
+                if i == 0:
+                    terms.append(str(coeff))
+                else:
+                    terms.append(f"{coeff}x^{i}")
+        return "+".join(terms[::-1])
 
 
 def main():
