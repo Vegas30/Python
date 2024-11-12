@@ -91,7 +91,6 @@ def main():
 main()
 
 
-
 # Два класса: Library, представляющий библиотеку, и Book, представляющий книгу. Библиотека будет содержать список книг, добавленных в нее.
 #
 # Требования:
@@ -188,6 +187,7 @@ class Book:
     def __str__(self):
         return f"{self.title}, {self.__author}, {self.year}"
 
+
 class Library:
     def __init__(self, name):
         self.name = name
@@ -220,6 +220,7 @@ class Library:
             for book in self.__books:
                 print(f" - {book}")
 
+
 def main():
     book1 = Book("Преступление и наказание", "Достоевский", 2023)
     book2 = Book("Война и мир", "Толстой", 2022)
@@ -235,4 +236,6 @@ def main():
 
     library1.output_list_books()
 
-main()
+
+if __name__ == '__main__':
+    main()
