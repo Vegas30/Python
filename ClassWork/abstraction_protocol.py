@@ -75,3 +75,7 @@ for employee in employees:
 
 for employee in employees:
     make_get_role(employee)
+
+print(BaseClass.__dict__)
+print("-----------------------------")
+print(dir(BaseClass))
