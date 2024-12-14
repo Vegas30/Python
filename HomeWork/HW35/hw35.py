@@ -97,6 +97,48 @@ def del_lines_with_digits(file_path):
             if not any(char.isdigit() for char in line):
                 output_file.write(line)
     return output_file_name
+# 8. Поиск максимальной длины строки.
+# Напишите программу, которая находит строку с наибольшей длиной
+# в текстовом файле.
+def max_len_line(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        max_line_length = len(file.readline())
+        for line in file:
+            if len(line) > max_line_length:
+                max_line_length = len(line)
+                result_line = line
+        return result_line, max_line_length
+# 9. Удаление комментариев из кода.
+# Напишите программу, которая удаляет все строки, начинающиеся с
+# символа #, из файла с исходным кодом.
+def del_lines_with_comments(file_path):
+    output_file_name = f'{file_path[:-4]}_no_comments.txt'
+    with open(file_path, 'r', encoding='utf-8') as file, open(output_file_name, 'w', encoding='utf-8') as output_file:
+        for line in file:
+            if not line[0] == '#':
+                output_file.write(line)
+    return output_file_name
+# 10. Извлечение всех чисел из файла.
+# Напишите программу, которая извлекает все числа из файла и
+# сохраняет их в отдельный файл.
+def all_digits_from_file(file_path):
+    output_file_name = f'{file_path[:-4]}_all_digits.txt'
+    with open(file_path, 'r', encoding='utf-8') as file, open(output_file_name, 'w', encoding='utf-8') as output_file:
+        for line in file:
+            for char in line:
+                if char.isdigit():
+                    output_file.write(char)
+    return output_file_name
+
+# 11. Построчная сортировка файла.
+# Напишите программу, которая сортирует все строки в файле в
+# алфавитном порядке и сохраняет результат в новом файле.
+def sort_lines(file_path):
+    output_file_name = f'{file_path[:-4]}_sorted_lines.txt'
+    with open(file_path, 'r', encoding='utf-8') as file, open(output_file_name, 'w', encoding='utf-8') as output_file:
+        lines_lst = sorted([line for line in file])
+        output_file.write(' '.join(lines_lst))
+    return output_file_name
 def main():
     # 1.
     file_path = "example.txt"
@@ -147,6 +189,21 @@ def main():
     file_path = "example.txt"
     result_file = del_lines_with_digits(file_path)
     print(f"7. Имя файла после удаления строк содержащих хотя бы одну цифру: {result_file}")
-
+    # 8.
+    file_path = "example.txt"
+    result_line, len_result_line = max_len_line(file_path)
+    print(f"8. Строка с максимальной длиной {len_result_line}:\n{result_line}")
+    # 9.
+    file_path = "example.txt"
+    result_file = del_lines_with_comments(file_path)
+    print(f"9. Имя файла после удаления строк начинающихся с #: {result_file}")
+    # 10.
+    file_path = "example.txt"
+    result_file = all_digits_from_file(file_path)
+    print(f"10. Имя файла содержащего все цифры из исходного файла: {result_file}")
+    # 11.
+    file_path = "example.txt"
+    result_file = sort_lines(file_path)
+    print(f"11. Имя файла содержащего отсортированные строки в алфавитном порядке: {result_file}")
 if __name__ == '__main__':
     main()
