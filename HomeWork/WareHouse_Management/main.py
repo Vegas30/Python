@@ -1,5 +1,7 @@
 # WareHouse_Management/main.py
-from operations.operations_file import load_items_from_file, save_items_to_file
+from operations.file_operations import load_items_from_file, save_items_to_file
+from operations.ware_operations import add_item, remove_item, find_items_by_location, filter_items_by_category_and_tags, \
+    update_item_quantity
 import csv
 import json
 
@@ -7,53 +9,12 @@ FILE_PATH = "data/warehouse.json"
 
 
 def load_items():
-    """Загружает товары из файла JSON"""
+    """Вызываем функцию для загрузки товаров из файла JSON"""
     return load_items_from_file(FILE_PATH) or []
 
-
-def add_item(items, item, file_path):
-    if any(existing_item['name'] == item['name'] for existing_item in items):
-        return "Ошибка: товар с таким названием уже существует."
-    items.append(item)
-    save_items_to_file(items, file_path)
-    return "Товар успешно добавлен."
-
-
-def remove_item(items, item_name, file_path):
-    for i, item in enumerate(items):
-        if item['name'] == item_name:
-            del items[i]
-            save_items_to_file(items, file_path)
-            return "Товар успешно удален."
-    return "Ошибка: товар с таким названием не найден."
-
-
-def filter_items_by_category_and_tags(items, category, tags, output_file):
-    if not category:
-        return "Ошибка: категория не указана."
-    filtered_items = [item for item in items if item['category'] == category and item['tags'] == tags]
-    if not filtered_items:
-        return "Ошибка: не найдено товаров с указанной категорией и тегами."
-    save_items_to_file(filtered_items, output_file)
-    return filtered_items
-
-
-def find_items_by_location(items, location, output_file):
-    found_items = [item for item in items if location in item['locations']]
-    save_items_to_file(found_items, output_file)
-    return found_items
-
-
-def update_item_quantity(items, item_name, quantity, file_path):
-    if quantity < 0:
-        return "Ошибка: количество не может быть отрицательным."
-    for item in items:
-        if item['name'] == item_name:
-            item['quantity'] = quantity
-            save_items_to_file(items, file_path)
-            return "Количество товара успешно обновлено."
-    return "Ошибка: товар с таким названием не найден."
-
+def save_items(items):
+    """Вызываем функцию для сохранения товаров в файл JSON"""
+    save_items_to_file(items, FILE_PATH)
 
 def export_items_to_csv(items, csv_file):
     try:
@@ -117,11 +78,11 @@ def main():
         "locations": ["C1", "C2"]
     }
 
-    print(add_item(items, new_item, file_path))
-    print(remove_item(items, "Chair", file_path))
+    print(add_item(items, new_item, FILE_PATH))
+    print(remove_item(items, "Chair", FILE_PATH))
     print(filter_items_by_category_and_tags(items, "Furniture", ["sale"], "filtered_items.json"))
     print(find_items_by_location(items, "A1", "items_at_location.json"))
-    print(update_item_quantity(items, "Laptop", 12, file_path))
+    print(update_item_quantity(items, "Laptop", 12, FILE_PATH))
     print(export_items_to_csv(items, "warehouse.csv"))
     print(import_items_from_json("import_data.json"))
     print(generate_warehouse_report(items, "warehouse_report.txt"))
@@ -146,9 +107,13 @@ def main():
                 "category": input("Введите категорию товара, например Furniture: "),
                 "quantity": int(input("Введите количество товара в виде целого числа, например 8: ")),
                 "price": round(float(input("Введите цену товара, например 150.50: ")), 2),
-                "tags": set(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', ')),
-                "locations": ["C1", "C2"]
+                "tags": list(set(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', '))),
+                "locations": list(input("Введите расположение товара, например C1, C2: ").split(', '))
             }
+
+        add_item(items, new_item, FILE_PATH)
+        save_items(items)
+        print("Товар успешно добавлен.")
 
 
 # Пример использования
