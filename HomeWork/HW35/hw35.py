@@ -136,8 +136,9 @@ def all_digits_from_file(file_path):
 def sort_lines(file_path):
     output_file_name = f'{file_path[:-4]}_sorted_lines.txt'
     with open(file_path, 'r', encoding='utf-8') as file, open(output_file_name, 'w', encoding='utf-8') as output_file:
-        lines_lst = sorted([line for line in file])
-        output_file.write(' '.join(lines_lst))
+        lines_lst = file.readlines()
+        sorted_lst = sorted(lines_lst)
+        output_file.write(''.join(sorted_lst))
     return output_file_name
 def main():
     # 1.
@@ -202,7 +203,7 @@ def main():
     result_file = all_digits_from_file(file_path)
     print(f"10. Имя файла содержащего все цифры из исходного файла: {result_file}")
     # 11.
-    file_path = "example.txt"
+    file_path = "example2.txt"
     result_file = sort_lines(file_path)
     print(f"11. Имя файла содержащего отсортированные строки в алфавитном порядке: {result_file}")
 if __name__ == '__main__':
