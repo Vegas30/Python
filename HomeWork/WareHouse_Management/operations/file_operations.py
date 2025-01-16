@@ -7,8 +7,8 @@ import json
 def save_items_to_file(items: list[dict], file_path: str):
     """Функция сохраняет список товаров в файл JSON"""
     try:
-        with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(items, f, ensure_ascii=False, indent=4)
+        with open(file_path, 'w', encoding='utf-8') as file:
+            json.dump(items, file, ensure_ascii=False, indent=4)
     except Exception as e:
         print(f"Ошибка при сохранении в файл: {e}")
 
