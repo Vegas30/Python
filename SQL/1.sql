@@ -11,7 +11,12 @@
 -- 11. Выбрать имена студентов и их адреса:
 -- SELECT name, adress FROM students;
 -- 13. Выбрать имена преподавателей и названия их уроков: 
-SELECT name, nameLessons FROM teachers JOIN lessons ON idTeachers = teacher_id
+SELECT 
+    name, nameLessons
+FROM
+    teachers
+        JOIN
+    lessons ON idTeachers = teacher_id;
 -- 14. Выбрать имена и должности всех преподавателей, у которых номер телефона начинается с "8":
 SELECT name, post
 FROM teachers
