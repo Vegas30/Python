@@ -2,6 +2,7 @@
 from operations.file_operations import load_items_from_file, save_items_to_file
 from operations.ware_operations import add_item, remove_item, find_items_by_location, filter_items_by_category_and_tags, \
     update_item_quantity
+from operations.validation import validate_new_item_data, ValidationError
 import csv
 import json
 
@@ -70,6 +71,7 @@ def main():
     items = load_items()
 
     new_item = {
+        "item_id": "1",
         "name": "Table",
         "category": "Furniture",
         "quantity": 8,
@@ -102,18 +104,54 @@ def main():
 
         choice = input("Введите номер действия: ")
         if choice == "1":
-            new_item = {
-                "name": input("Введите наименование товара, например Table: "),
-                "category": input("Введите категорию товара, например Furniture: "),
-                "quantity": int(input("Введите количество товара в виде целого числа, например 8: ")),
-                "price": round(float(input("Введите цену товара, например 150.50: ")), 2),
-                "tags": list(set(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', '))),
-                "locations": list(input("Введите расположение товара, например C1, C2: ").split(', '))
-            }
+            try:
+                new_item = {
+                    "item_id": input("Введите номер товара: "),
+                    "name": input("Введите наименование товара, например Table: "),
+                    "category": input("Введите категорию товара, например Furniture: "),
+                    "quantity": int(input("Введите количество товара в виде целого числа, например 8: ")),
+                    "price": round(float(input("Введите цену товара, например 150.50: ")), 2),
+                    "tags": list(set(str(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', ')))),
+                    "locations": list(input("Введите расположение товара, например C1, C2: ").split(', '))
+                }
+                validate_new_item_data(items, new_item)
+                add_item(items, new_item, FILE_PATH)
+                save_items(items)
+                print("Товар успешно добавлен.")
+            except ValidationError as e:
+                print(f"Ошибка добавления нового товара: {e}")
 
-        add_item(items, new_item, FILE_PATH)
-        save_items(items)
-        print("Товар успешно добавлен.")
+        elif choice == "2":
+            item_id = input("Введите ID товара для удаления: ")
+            remove_item(items, item_id, FILE_PATH)
+
+        elif choice == "3":
+            category = input("Введите категорию товара: ")
+            tags = list(set(input("Введите теги товара через запятую: ").split(', ')))
+            filter_items_by_category_and_tags(items, category, tags, "filtered_items.json")
+
+        elif choice == "4":
+            location = input("Введите местоположение товара: ")
+            find_items_by_location(items, location, "items_at_location.json")
+
+        elif choice == "5":
+            item_name = input("Введите наименование товара: ")
+            quantity = int(input("Введите новое количество товара: "))
+            update_item_quantity(items, item_name, quantity, FILE_PATH)
+
+        elif choice == "6":
+            export_items_to_csv(items, "warehouse.csv")
+
+        elif choice == "7":
+            json_file = input("Введите имя файла для импорта: ")
+            import_items_from_json(json_file)
+
+        elif choice == "8":
+            generate_warehouse_report(items, "warehouse_report.txt")
+
+        else:
+            print("Некорректный ввод. Попробуйте еще раз.")
+
 
 
 # Пример использования

@@ -1,9 +1,9 @@
 # WareHouse_Management/operations/ware_operations.py
 
-from operations.file_operations import save_items_to_file
+from file_operations import save_items_to_file
 
 
-def add_item(items: list[dict], item: dict, file_path: str):
+def add_item(items: list[dict], item: dict, file_path: str) -> str:
     if any(existing_item['name'] == item['name'] for existing_item in items):
         return "Ошибка: товар с таким названием уже существует."
     items.append(item)
@@ -11,10 +11,10 @@ def add_item(items: list[dict], item: dict, file_path: str):
     return "Товар успешно добавлен."
 
 
-def remove_item(items, item_name, file_path):
-    for i, item in enumerate(items):
-        if item['name'] == item_name:
-            del items[i]
+def remove_item(items: list[dict], item_id: str, file_path:str) -> str:
+    for index, item in enumerate(items):
+        if item['item_id'] == item_id:
+            del items[index]
             save_items_to_file(items, file_path)
             return "Товар успешно удален."
     return "Ошибка: товар с таким названием не найден."
