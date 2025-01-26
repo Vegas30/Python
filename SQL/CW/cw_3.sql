@@ -19,3 +19,11 @@
 -- SELECT title, author, price 
 -- FROM books
 -- WHERE price > (SELECT AVG(price) FROM books); ???
+
+-- SELECT *
+-- FROM students
+-- WHERE surname = 'Кузьмина' 
+-- AND region > (
+--     SELECT AVG(region)
+--     FROM students
+-- );
