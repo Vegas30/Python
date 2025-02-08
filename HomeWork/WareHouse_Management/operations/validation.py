@@ -3,13 +3,13 @@
 class ValidationError(Exception):
     pass
 
-def validate_new_item_data(items: list[dict], new_item: dict):
-    if not new_item['item_id'].strip():
-        raise ValidationError("Введите ID товара.")
-
+def validate_new_item_data(items: list[dict], new_item: dict) -> None:
     for item in items:
         if item['item_id'] == new_item['item_id']:
             raise ValidationError("ID товара уже существует.")
+
+    if not new_item['item_id'].strip():
+        raise ValidationError("Введите ID товара.")
 
     if not new_item['name'].strip():
         raise ValidationError("Введите наименование товара.")
