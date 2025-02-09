@@ -1,5 +1,17 @@
 # WareHouse_Management/operations/ware_operations.py
 
+def generate_unique_item_id(items: list[dict]) -> str:
+    """
+    Генерирует уникальный ID для товара.
+
+    :param items: Список существующих товаров.
+    :type items: list[dict]
+    :return: Уникальный ID для нового товара.
+    :rtype: str
+    """
+    item_ids = [item['item_id'] for item in items]
+    new_item_id = str(max(map(int, item_ids)) + 1) if item_ids else '1'
+    return new_item_id
 
 def add_item(items: list[dict], item: dict) -> None:
     """

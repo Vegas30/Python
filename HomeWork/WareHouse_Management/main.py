@@ -2,7 +2,7 @@
 from operations.file_operations import load_items_from_file, save_items_to_file, export_items_to_csv, \
     import_items_from_json
 from operations.ware_operations import add_item, remove_item, find_items_by_location, filter_items_by_category_and_tags, \
-    update_item_quantity, generate_warehouse_report
+    update_item_quantity, generate_warehouse_report, generate_unique_item_id
 from operations.validation import validate_new_item_data, ValidationError
 import csv
 import json
@@ -52,15 +52,27 @@ def main():
         choice = input("Введите номер действия: ")
         if choice == "1":
             try:
+                while not (new_name := input("Введите наименование товара, например Table: ")):
+                    print("Наименование товара не может быть пустым.")
+                while not (new_category := input("Введите категорию товара, например Furniture: ")):
+                    print("Категория товара не может быть пустой.")
+                while not (new_quantity := int(input("Введите количество товара в виде целого числа, например 8: "))):
+                    print("Количество товара должно быть целым числом.")
+                while not (new_price := round(float(input("Введите цену товара, например 150.50: ")), 2)):
+                    print("Цена товара должна быть числом.")
+                while not (new_tags := list(set(str(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', '))))):
+                    print("Метки товара не могут быть пустыми.")
+                while not (new_locations := list(input("Введите расположение товара, например C1, C2: ").split(', '))):
+                    print("Расположение товара не может быть пустым.")
+
                 new_item = {
-                    "item_id": input("Введите номер товара: "),
-                    "name": input("Введите наименование товара, например Table: "),
-                    "category": input("Введите категорию товара, например Furniture: "),
-                    "quantity": int(input("Введите количество товара в виде целого числа, например 8: ")),
-                    "price": round(float(input("Введите цену товара, например 150.50: ")), 2),
-                    "tags": list(set(str(
-                        input("Введите метки товара (tags) через запятую, например office, sale: ").split(', ')))),
-                    "locations": list(input("Введите расположение товара, например C1, C2: ").split(', '))
+                    "item_id": generate_unique_item_id(items),
+                    "name": new_name,
+                    "category": new_category,
+                    "quantity": new_quantity,
+                    "price": new_price,
+                    "tags": new_tags,
+                    "locations": new_locations
                 }
                 validate_new_item_data(items, new_item)
                 add_item(items, new_item)
