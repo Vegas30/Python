@@ -1,7 +1,7 @@
 -- SHOW ENGINE InnoDB STATUS;
-BEGIN;
-SELECT * from tests;
-COMMIT;
+-- BEGIN;
+-- SELECT * from tests;
+-- COMMIT;
 -- BEGIN;
 
 -- SAVEPOINT my_savepoint_0;
@@ -16,5 +16,15 @@ COMMIT;
 
 -- ROLLBACK TO SAVEPOINT MY_savepoint_0;
 
-SHOW ENGINE InnoDB STATUS;
+-- SHOW ENGINE InnoDB STATUS; 
 
+create unique index idx_unuq ON students(name);
+
+
+-- create unique index idx_Spec_id ON students(special_id);
+
+show INDEX FROM students;
+
+EXPLAIN SELECT name
+FROM students
+WHERE name = 'Иван';
