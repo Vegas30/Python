@@ -47,3 +47,5 @@ END;
 $$ LANGUAGE plpgsql;
 
 SELECT * FROM calculate_amount_total(1, '2024-02-01 10:30:00', '2024-02-11 15:50:00');
+
+
