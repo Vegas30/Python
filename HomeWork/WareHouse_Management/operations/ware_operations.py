@@ -1,4 +1,6 @@
 # WareHouse_Management/operations/ware_operations.py
+import json
+
 
 def generate_unique_item_id(items: list[dict]) -> str:
     """
@@ -12,6 +14,7 @@ def generate_unique_item_id(items: list[dict]) -> str:
     item_ids = [item['item_id'] for item in items]
     new_item_id = str(max(map(int, item_ids)) + 1) if item_ids else '1'
     return new_item_id
+
 
 def add_item(items: list[dict], item: dict) -> None:
     """
@@ -44,24 +47,47 @@ def remove_item(items: list[dict], item_id: str) -> bool:
     return False  # "Ошибка: товар с таким названием не найден."
 
 
-def filter_items_by_category_and_tags(items: list[dict], category: str, tags: list[str]) -> list[dict] | bool:
+def filter_items_by_category_and_tags(items: list[dict], category: str, tags: set[str]) -> list[dict] | str:
     """
-    Фильтрует товары по категории и тегам.
+    Фильтрует товары по категории и тегам. Возвращает список товаров, которые принадлежат указанной категории и содержат хотя бы один из указанных тегов.
 
     :param items: Список существующих товаров.
     :type items: list[dict]
     :param category: Категория для фильтрации.
     :type category: str
-    :param tags: Теги для фильтрации.
-    :type tags: list[str]
-    :return: Список отфильтрованных товаров или False, если товары не найдены.
-    :rtype: list[dict] | bool
+    :param tags: Множество тегов для фильтрации.
+    :type tags: set[str]
+    :return: Список отфильтрованных товаров или сообщение об ошибке.
+    :rtype: list[dict] | str
     """
-    filtered_items = [item for item in items if item['category'] == category and item['tags'] == tags]
-    if not filtered_items:
-        return False  # "Ошибка: не найдено товаров с указанной категорией и тегами."
-    # save_items_to_file(filtered_items, output_file)
+    if not category:
+        return "Ошибка: категория не указана."
+    try:
+        filtered_items = [item for item in items if item['category'] == category and set(item['tags']).intersection(tags)]
+    except Exception as e:
+        return f"Ошибка: {e}"
+
     return filtered_items
+
+
+# def filter_items_by_category_and_tags(items: list[dict], category: str, tags: list[str]) -> list[dict] | bool:
+#     """
+#     Фильтрует товары по категории и тегам.
+#
+#     :param items: Список существующих товаров.
+#     :type items: list[dict]
+#     :param category: Категория для фильтрации.
+#     :type category: str
+#     :param tags: Теги для фильтрации.
+#     :type tags: list[str]
+#     :return: Список отфильтрованных товаров или False, если товары не найдены.
+#     :rtype: list[dict] | bool
+#     """
+#     filtered_items = [item for item in items if item['category'] == category and item['tags'] == tags]
+#     if not filtered_items:
+#         return False  # "Ошибка: не найдено товаров с указанной категорией и тегами."
+#     # save_items_to_file(filtered_items, output_file)
+#     return filtered_items
 
 
 def find_items_by_location(items: list[dict], location: str) -> list[dict]:
@@ -118,7 +144,7 @@ def generate_warehouse_report(items: list[dict], report_file: str) -> bool | str
                 if not item['locations']:
                     raise ValueError(f"У товара '{item['name']}' отсутствуют местоположения.")
                 f.write(
-                    f"Товар: {item['name']}, Количество: {item['quantity']}, Местоположения: {', '.join(item['locations'])}\n")
+                    f"ID Товара: {item['item_id']}, Название товара: {item['name']}, Количество: {item['quantity']}, Местоположения: {', '.join(item['locations'])}\n")
         return True
     except Exception as e:
         print(f"Ошибка при создании отчета: {e}")

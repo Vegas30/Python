@@ -90,15 +90,16 @@ def main():
                 print("Ошибка: товар с таким ID не найден.")
 
         elif choice == "3":
-            category = input("Введите категорию товара: ")
-            if not category:
-                return "Ошибка: категория не указана."
-            tags = list(set(input("Введите теги товара через запятую: ").split(', ')))
-            if not tags:
-                return "Ошибка: не указаны теги."
+            while not (category := input("Введите категорию товара: ")):
+                print("Категория товара не может быть пустой.")
+
+            while not len((tags := set(input("Введите теги товара через запятую: ").split(', ')))) >= 1:
+                print("Укажите хотя бы один тег.")
+            print(tags)
+            print(len(tags))
             filtered_items = filter_items_by_category_and_tags(items, category, tags)
             if filtered_items:
-                save_items_to_file(items, "filtered_items.json")
+                save_items_to_file(filtered_items, "filtered_items.json")
                 print("Товары найдены, результаты сохранены в файл filtered_items.json:")
                 for item in filtered_items:
                     print(item)
