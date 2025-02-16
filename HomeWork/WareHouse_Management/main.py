@@ -60,7 +60,7 @@ def main():
                     print("Количество товара должно быть целым числом.")
                 while not (new_price := round(float(input("Введите цену товара, например 150.50: ")), 2)):
                     print("Цена товара должна быть числом.")
-                while not (new_tags := list(set(str(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', '))))):
+                while not (new_tags := list(set(input("Введите метки товара (tags) через запятую, например office, sale: ").split(', ')))):
                     print("Метки товара не могут быть пустыми.")
                 while not (new_locations := list(input("Введите расположение товара, например C1, C2: ").split(', '))):
                     print("Расположение товара не может быть пустым.")
@@ -90,11 +90,17 @@ def main():
                 print("Ошибка: товар с таким ID не найден.")
 
         elif choice == "3":
-            while not (category := input("Введите категорию товара: ")):
+            while not (category := input("Введите категорию товара: ").lower()):
                 print("Категория товара не может быть пустой.")
 
-            while not len((tags := set(input("Введите теги товара через запятую: ").split(', ')))) >= 1:
-                print("Укажите хотя бы один тег.")
+            while True:
+                tags = set(input("Введите теги товара через запятую: ").lower().split(', '))
+                if tags == {''}:
+                    tags = {""}
+                    break
+                    # print("Укажите хотя бы один тег.")
+                # else:
+                #     break
             print(tags)
             print(len(tags))
             filtered_items = filter_items_by_category_and_tags(items, category, tags)

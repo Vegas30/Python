@@ -63,7 +63,7 @@ def filter_items_by_category_and_tags(items: list[dict], category: str, tags: se
     if not category:
         return "Ошибка: категория не указана."
     try:
-        filtered_items = [item for item in items if item['category'] == category and set(item['tags']).intersection(tags)]
+        filtered_items = [item for item in items if (item['category']).lower() == category and set(item['tags']).intersection(tags)]
     except Exception as e:
         return f"Ошибка: {e}"
 
