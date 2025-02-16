@@ -98,11 +98,6 @@ def main():
                 if tags == {''}:
                     tags = {""}
                     break
-                    # print("Укажите хотя бы один тег.")
-                # else:
-                #     break
-            print(tags)
-            print(len(tags))
             filtered_items = filter_items_by_category_and_tags(items, category, tags)
             if filtered_items:
                 save_items_to_file(filtered_items, "filtered_items.json")
