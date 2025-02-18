@@ -24,4 +24,5 @@ BEFORE INSERT OR UPDATE ON articles
 FOR EACH ROW
 EXECUTE FUNCTION update_search_vector();
 
--- INSERT INTO articles .... (доделать)
+INSERT INTO articles (title, content) VALUES
+('PostgreSQL для начинающих', 'PostgreSQL — это мощная объектно-реляционная СУБД с открытым исходным кодом, используемая для хранения и обработки данных.');
