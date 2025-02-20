@@ -1,7 +1,7 @@
 # WareHouse_Management/operations/file_operations.py
 import csv
 import json
-from typing import AnyStr
+
 
 """Модуль для работы с файлами"""
 
@@ -28,6 +28,7 @@ def load_items_from_file(file_path: str) -> list[dict]:
         return []
 
 def export_items_to_csv(items: list[dict], csv_file: str) -> str:
+    """Функция экспортирует данные в CSV-файл"""
     try:
         with open(csv_file, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -47,6 +48,7 @@ def export_items_to_csv(items: list[dict], csv_file: str) -> str:
 
 
 def import_items_from_json(json_file: str) -> list[dict] | str:
+    """Функция импортирует данные из JSON-файла"""
     try:
         with open(json_file, 'r', encoding='utf-8') as f:
             items = json.load(f)

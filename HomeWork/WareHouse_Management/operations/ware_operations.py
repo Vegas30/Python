@@ -1,5 +1,6 @@
 # WareHouse_Management/operations/ware_operations.py
-import json
+
+"""Модуль для работы с товарами на складе. """
 
 
 def generate_unique_item_id(items: list[dict]) -> str:
@@ -68,26 +69,6 @@ def filter_items_by_category_and_tags(items: list[dict], category: str, tags: se
         return f"Ошибка: {e}"
 
     return filtered_items
-
-
-# def filter_items_by_category_and_tags(items: list[dict], category: str, tags: list[str]) -> list[dict] | bool:
-#     """
-#     Фильтрует товары по категории и тегам.
-#
-#     :param items: Список существующих товаров.
-#     :type items: list[dict]
-#     :param category: Категория для фильтрации.
-#     :type category: str
-#     :param tags: Теги для фильтрации.
-#     :type tags: list[str]
-#     :return: Список отфильтрованных товаров или False, если товары не найдены.
-#     :rtype: list[dict] | bool
-#     """
-#     filtered_items = [item for item in items if item['category'] == category and item['tags'] == tags]
-#     if not filtered_items:
-#         return False  # "Ошибка: не найдено товаров с указанной категорией и тегами."
-#     # save_items_to_file(filtered_items, output_file)
-#     return filtered_items
 
 
 def find_items_by_location(items: list[dict], location: str) -> list[dict]:

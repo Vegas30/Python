@@ -4,8 +4,7 @@ from operations.file_operations import load_items_from_file, save_items_to_file,
 from operations.ware_operations import add_item, remove_item, find_items_by_location, filter_items_by_category_and_tags, \
     update_item_quantity, generate_warehouse_report, generate_unique_item_id
 from operations.validation import validate_new_item_data, ValidationError
-import csv
-import json
+
 
 FILE_PATH = "data/warehouse.json"
 
@@ -133,7 +132,6 @@ def main():
 
         elif choice == "6":
             export_items_to_csv(items, "warehouse.csv")
-            # print("Данные успешно экспортированы в warehouse.csv.")
 
         elif choice == "7":
             json_file = input("Введите имя файла для импорта: ")
