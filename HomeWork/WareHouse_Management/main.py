@@ -1,12 +1,12 @@
 # WareHouse_Management/main.py
-from operations.file_operations import load_items_from_file, save_items_to_file, export_items_to_csv, \
+from src.operations.file_operations import load_items_from_file, save_items_to_file, export_items_to_csv, \
     import_items_from_json
-from operations.ware_operations import add_item, remove_item, find_items_by_location, filter_items_by_category_and_tags, \
+from src.operations.ware_operations import add_item, remove_item, find_items_by_location, filter_items_by_category_and_tags, \
     update_item_quantity, generate_warehouse_report, generate_unique_item_id
-from operations.validation import validate_new_item_data, ValidationError
+from src.operations.validation import validate_new_item_data, ValidationError
 
 
-FILE_PATH = "data/warehouse.json"
+FILE_PATH = "src/data/warehouse.json"
 
 
 def load_items() -> list[dict]:

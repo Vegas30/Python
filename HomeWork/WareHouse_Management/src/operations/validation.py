@@ -1,4 +1,4 @@
-# WareHouse_Management/operations/validation.py
+# WareHouse_Management/src/operations/validation.py
 
 """Модуль для валидации данных."""
 
@@ -11,7 +11,7 @@ def validate_new_item_data(items: list[dict], new_item: dict) -> None:
             raise ValidationError("ID товара уже существует.")
 
     if not new_item['item_id'].strip():
-        raise ValidationError("Введите ID товара.")
+        raise ValidationError("Отсутствует ID товара.")
 
     if not new_item['name'].strip():
         raise ValidationError("Введите наименование товара.")

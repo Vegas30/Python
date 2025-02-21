@@ -1,4 +1,4 @@
-# WareHouse_Management/operations/ware_operations.py
+# WareHouse_Management/src/operations/ware_operations.py
 
 """Модуль для работы с товарами на складе. """
 
