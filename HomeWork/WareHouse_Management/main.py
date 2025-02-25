@@ -92,11 +92,11 @@ def main():
             while not (category := input("Введите категорию товара: ").lower()):
                 print("Категория товара не может быть пустой.")
 
-            while True:
-                tags = set(input("Введите теги товара через запятую: ").lower().split(', '))
-                if tags == {''}:
-                    tags = {""}
-                    break
+            tags = set(input("Введите теги товара через запятую: ").lower().split(', '))
+
+            if tags == {''}:  # Если пользователь нажал Enter без ввода тегов
+                tags = {""}
+
             filtered_items = filter_items_by_category_and_tags(items, category, tags)
             if filtered_items:
                 save_items_to_file(filtered_items, "filtered_items.json")

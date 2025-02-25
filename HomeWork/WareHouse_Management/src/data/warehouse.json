@@ -1,0 +1,119 @@
+[
+    {
+        "item_id": "1",
+        "name": "Table",
+        "category": "Furniture",
+        "quantity": 8,
+        "price": 150.5,
+        "tags": [
+            "office",
+            "sale"
+        ],
+        "locations": [
+            "C1",
+            "C2"
+        ]
+    },
+    {
+        "item_id": "2",
+        "name": "Стул",
+        "category": "Furniture",
+        "quantity": 4,
+        "price": 45.5,
+        "tags": [
+            "kitchen",
+            "new"
+        ],
+        "locations": [
+            "C1",
+            "C2"
+        ]
+    },
+    {
+        "item_id": "3",
+        "name": "Стул_test",
+        "category": "Furniture",
+        "quantity": 8,
+        "price": 45.5,
+        "tags": [
+            "kitchen",
+            "new",
+            "sale"
+        ],
+        "locations": [
+            "C1",
+            "C2"
+        ]
+    },
+    {
+        "item_id": "4",
+        "name": "TAble_test",
+        "category": "Furnityre",
+        "quantity": 10,
+        "price": 150.6,
+        "tags": [
+            "office",
+            "old"
+        ],
+        "locations": [
+            "b3"
+        ]
+    },
+    {
+        "item_id": "5",
+        "name": "Table",
+        "category": "Furniture",
+        "quantity": 50,
+        "price": 155.6,
+        "tags": [
+            "office",
+            "new"
+        ],
+        "locations": [
+            "B3"
+        ]
+    },
+    {
+        "item_id": "6",
+        "name": "Laptop",
+        "category": "Electronics",
+        "quantity": 10,
+        "price": 999.99,
+        "tags": [
+            "office",
+            "new"
+        ],
+        "locations": [
+            "A1",
+            "A2"
+        ]
+    },
+    {
+        "item_id": "7",
+        "name": "Desk",
+        "category": "Furniture",
+        "quantity": 5,
+        "price": 199.99,
+        "tags": [
+            "office",
+            "old"
+        ],
+        "locations": [
+            "B1"
+        ]
+    },
+    {
+        "item_id": "8",
+        "name": "Table_test_move_to_src",
+        "category": "furniture",
+        "quantity": 1,
+        "price": 1.0,
+        "tags": [
+            "delet_it",
+            "old"
+        ],
+        "locations": [
+            "F3"
+        ]
+    }
+]

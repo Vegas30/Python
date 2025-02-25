@@ -125,7 +125,7 @@ def generate_warehouse_report(items: list[dict], report_file: str) -> bool | str
                 if not item['locations']:
                     raise ValueError(f"У товара '{item['name']}' отсутствуют местоположения.")
                 f.write(
-                    f"ID Товара: {item['item_id']}, Название товара: {item['name']}, Количество: {item['quantity']}, Местоположения: {', '.join(item['locations'])}\n")
+                    f"ID Товара: {item['item_id']}, Название товара: {item['name']}, Категория: {item['category']}, Количество: {item['quantity']}, Теги: {', '.join(item['tags'])}, Местоположения: {', '.join(item['locations'])}\n")
         return True
     except Exception as e:
         print(f"Ошибка при создании отчета: {e}")

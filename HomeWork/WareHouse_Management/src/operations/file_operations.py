@@ -7,7 +7,14 @@ import json
 
 
 def save_items_to_file(items: list[dict], file_path: str) -> None:
-    """Функция сохраняет список товаров в файл JSON"""
+    """
+    Функция сохраняет список товаров в файл JSON.
+
+    :param items: Список товаров для сохранения.
+    :type items: list[dict]
+    :param file_path: Путь к файлу для сохранения товаров.
+    :type file_path: str
+    """
     try:
         with open(file_path, 'w', encoding='utf-8') as file:
             json.dump(items, file, ensure_ascii=False, indent=4)
@@ -16,7 +23,14 @@ def save_items_to_file(items: list[dict], file_path: str) -> None:
 
 
 def load_items_from_file(file_path: str) -> list[dict]:
-    """Функция загружает список товаров из файла JSON"""
+    """
+    Функция загружает список товаров из файла JSON.
+
+    :param file_path: Путь к файлу для загрузки товаров.
+    :type file_path: str
+    :return: Список загруженных товаров.
+    :rtype: list[dict]
+    """
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -28,7 +42,16 @@ def load_items_from_file(file_path: str) -> list[dict]:
         return []
 
 def export_items_to_csv(items: list[dict], csv_file: str) -> str:
-    """Функция экспортирует данные в CSV-файл"""
+    """
+    Функция экспортирует данные в CSV-файл.
+
+    :param items: Список товаров для экспорта.
+    :type items: list[dict]
+    :param csv_file: Путь к файлу CSV.
+    :type csv_file: str
+    :return: Сообщение о результате экспорта.
+    :rtype: str
+    """
     try:
         with open(csv_file, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
@@ -48,7 +71,14 @@ def export_items_to_csv(items: list[dict], csv_file: str) -> str:
 
 
 def import_items_from_json(json_file: str) -> list[dict] | str:
-    """Функция импортирует данные из JSON-файла"""
+    """
+    Функция импортирует данные из JSON-файла
+
+    :param json_file: Путь к файлу JSON.
+    :type json_file: str
+    :return: Список импортированных товаров или сообщение об ошибке.
+    :rtype: list[dict] | str
+    """
     try:
         with open(json_file, 'r', encoding='utf-8') as f:
             items = json.load(f)

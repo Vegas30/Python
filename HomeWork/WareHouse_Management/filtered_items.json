@@ -1,0 +1,33 @@
+[
+    {
+        "item_id": "4",
+        "name": "Стул",
+        "category": "Furniture",
+        "quantity": 4,
+        "price": 45.5,
+        "tags": [
+            "kitchen",
+            "new"
+        ],
+        "locations": [
+            "C1",
+            "C2"
+        ]
+    },
+    {
+        "item_id": "5",
+        "name": "Стул_test",
+        "category": "Furniture",
+        "quantity": 8,
+        "price": 45.5,
+        "tags": [
+            "kitchen",
+            "new",
+            "sale"
+        ],
+        "locations": [
+            "C1",
+            "C2"
+        ]
+    }
+]

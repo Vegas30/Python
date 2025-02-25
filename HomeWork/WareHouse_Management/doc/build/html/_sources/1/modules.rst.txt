@@ -1,0 +1,8 @@
+WareHouse Management
+====================
+
+.. toctree::
+   :maxdepth: 4
+
+   main
+   operations
