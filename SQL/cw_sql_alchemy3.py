@@ -53,6 +53,7 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+
 session.begin()
 try:
     professor1 = Professor(name="Rasul")
@@ -80,6 +81,7 @@ try:
 except Exception as e:
     session.rollback()
     print(f"Ошибка {e}")
+
 
 finally:
     session.close()
