@@ -5,7 +5,7 @@ import logging
 class Database:
     def __init__(self):
         self.conn = psycopg2.connect(
-            dbname="flower_shop",
+            dbname="flower_db",
             user='postgres',
             password='12345678',
             host='localhost',
