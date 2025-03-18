@@ -33,7 +33,7 @@ class AddFlowerDialog(QDialog):
 
     def browse_image(self):
         file_name, _ = QFileDialog.getOpenFileName(
-            self, "Выбрать изображение", "", "Images (*.png,*.jpg,*.jpeg)")
+            self, "Выбрать изображение", "", "Images (*.png *.jpg *.jpeg)")
         if file_name:
             self.image_path.setText(file_name)
 
