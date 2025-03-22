@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
-from dialogs import AddFlowerDialog
+from flower_shop.src.dialogs import AddFlowerDialog
 import logging
 
 
@@ -46,6 +46,9 @@ class FlowersTab(QWidget):
 
         self.btn_add.clicked.connect(self.add_flower)
         self.search.textChanged.connect(self.handle_search_flower)
+        self.btn_delete.clicked.connect(self.delete_flower)
+        self.btn_refresh.clicked.connect(self.load_flowers)
+        self.btn_edit.clicked.connect(self.edit_flower)
 
     def load_flowers(self):
         try:
@@ -97,4 +100,52 @@ class FlowersTab(QWidget):
 
         except Exception as e:
             logging.error(f"Ошибка добавления: {str(e)}")
+            QMessageBox.critical(self, "Ошибка", f"Ошибка: {str(e)}")
+
+
+    def delete_flower(self):
+        try:
+            selected_row = self.flowers_table.currentRow()
+            if selected_row == -1:          # -1 это None
+                QMessageBox.warning(self, "Ошибка", f"Выберите цветок!")
+            flower_id = self.flowers_table.item(selected_row, 0).text()
+            query = "DELETE FROM flowers WHERE flower_id = %s"
+            if self.db.execute_query(query,(flower_id,)):
+                self.load_flowers()
+                QMessageBox.information(self, "Успех", "Цветок удален!")
+            else:
+                QMessageBox.critical(self, "Ошибка", "Ошибка при удалении!")
+
+        except Exception as e:
+            logging.error(f"Ошибка удаления: {str(e)}")
+            QMessageBox.critical(self, "Ошибка", f"Ошибка: {str(e)}")
+
+    def edit_flower(self):
+        try:
+            selected_row = self.flowers_table.currentRow()
+            if selected_row == -1:          # -1 это None
+                QMessageBox.warning(self, "Ошибка", f"Выберите цветок!")
+
+            flower_id = self.flowers_table.item(selected_row,0).text()
+            dialog = AddFlowerDialog(self)
+
+            dialog.name.setText(self.flowers_table.item(selected_row, 1).text())
+            dialog.price.setText(self.flowers_table.item(selected_row, 2).text())
+            dialog.quantity.setText(self.flowers_table.item(selected_row, 3).text())
+            dialog.image_path.setText(self.flowers_table.item(selected_row, 4).text())
+
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                name, price, quantity, image_path = dialog.get_data()
+                query = """
+                    UPDATE flowers
+                    SET name = %s, price = %s, quantity = %s, image_path = %s
+                    WHERE flower_id = %s
+                """
+                if self.db.execute_query(query, (name, price, quantity, image_path, flower_id)):
+                    self.load_flowers()
+                    QMessageBox.information(self, "Успех", f"Данные обновлены!")
+                else:
+                    QMessageBox.critical(self, "Ошибка!", "Ошибка при обновлении")
+        except Exception as e:
+            logging.error(f"Ошибка редактирования: {str(e)}")
             QMessageBox.critical(self, "Ошибка", f"Ошибка: {str(e)}")
