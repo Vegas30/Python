@@ -21,11 +21,12 @@ CREATE TABLE suppliers (
     supplier_id INTEGER PRIMARY KEY,
     supplier_name TEXT NOT NULL,
     contact_person TEXT,
-    phone_number TEXT CHECK (phone_number ~ '^\d{10}$'),
+    phone_number TEXT NOT NULL CHECK (phone_number ~ '^\d{11}$'),
     email TEXT CHECK (email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE stock (
     stock_id INTEGER PRIMARY KEY,

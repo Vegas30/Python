@@ -3,6 +3,7 @@ from database import Database
 from tabs.flowers_tab import FlowersTab
 from tabs.clients_tab import ClientsTab
 from styles import APP_STYLESHEET
+# from tabs.orders_tab import
 
 class FlowerShopApp(QMainWindow):
     def __init__(self):

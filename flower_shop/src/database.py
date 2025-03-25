@@ -7,9 +7,9 @@ class Database:
         self.conn = psycopg2.connect(
             dbname="flower_db",
             user='postgres',
-            password='12345678',
+            password='7773',
             host='localhost',
-            port='5434'
+            port='5432'
         )
 
         self.cursor = self.conn.cursor()

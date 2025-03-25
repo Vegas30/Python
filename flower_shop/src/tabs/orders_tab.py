@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import (
     QWidget, QTableWidget, QTableWidgetItem, QVBoxLayout,
-    QHBoxLayout, QPushButton, QLineEdit, QHeaderView, QMessageBox, QDialog, QComboBox
+    QHBoxLayout, QPushButton, QLineEdit, QHeaderView, QMessageBox, QDialog, QComboBox, QLabel
 )
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
@@ -40,8 +40,11 @@ class OrdersTab(QWidget):
         self.search_orders = QLineEdit()
         self.search_orders.setPlaceholderText("Поиск...")
 
-        control_layout.addWidget(self.btn_add_client)
-        control_layout.addWidget(self.btn_delete_client)
+        control_layout.addWidget(self.btn_create)
+        control_layout.addWidget(QLabel("Фильтр:"))
+        control_layout.addWidget(self.btn_filter_status)
+        # control_layout.addWidget(self.btn_add_client)
+        # control_layout.addWidget(self.btn_delete_client)
         # control_layout.addWidget(self.btn_edit)
         # control_layout.addWidget(self.btn_refresh)
         control_layout.addWidget(self.search_orders)

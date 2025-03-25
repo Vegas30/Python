@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
-from flower_shop.src.dialogs import AddFlowerDialog
+from Python.flower_shop.src.dialogs import AddFlowerDialog
 import logging
 
 
