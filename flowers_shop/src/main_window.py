@@ -2,8 +2,8 @@ from PyQt6.QtWidgets import QMainWindow, QTabWidget
 from database import Database
 from tabs.flowers_tab import FlowersTab
 from tabs.clients_tab import ClientsTab
+from tabs.orders_tab import OrdersTab
 from styles import APP_STYLESHEET
-# from tabs.orders_tab import
 
 class FlowerShopApp(QMainWindow):
     def __init__(self):
@@ -12,10 +12,8 @@ class FlowerShopApp(QMainWindow):
         self.init_ui()
         self.set_styles()
 
-
     def set_styles(self):
         self.setStyleSheet(APP_STYLESHEET)
-
 
     def init_ui(self):
         self.setWindowTitle("Flower Shop")
@@ -28,3 +26,4 @@ class FlowerShopApp(QMainWindow):
 
         tabs.addTab(FlowersTab(self.db), "Цветы")
         tabs.addTab(ClientsTab(self.db), "Клиенты")
+        tabs.addTab(OrdersTab(self.db), "Заказы")

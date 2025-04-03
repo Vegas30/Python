@@ -1,17 +1,15 @@
 import psycopg2
 import logging
 
-
 class Database:
     def __init__(self):
         self.conn = psycopg2.connect(
             dbname="flower_db",
-            user='postgres',
-            password='7773',
-            host='localhost',
-            port='5432'
+            user="postgres",
+            password="vfrcbv1",
+            host="localhost",
+            port="5433"
         )
-
         self.cursor = self.conn.cursor()
 
     def execute_query(self, query, params=None):

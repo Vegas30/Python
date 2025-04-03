@@ -4,7 +4,7 @@ APP_STYLESHEET = """
         background-color: #f5faf8; /* задний фон */
         font-family: 'Segoe UI', Arial, sans-serif;
     }
-
+    
     QTabBar::tab {
         background: qlineargradient(x1:0, y1:0, x2:0, y2: 1, 
         stop:0 #f5faf8, stop: 0.4 #e0f0ec, 
@@ -25,7 +25,7 @@ APP_STYLESHEET = """
         color: #306050;
         border: 2px solid #80a098;
     }
-
+    
     /* Таблицы */
     QTableWidget {
         background-color: #ffffff;
@@ -34,17 +34,17 @@ APP_STYLESHEET = """
         border: 1px solid #c0d0c8;
         gridline-color: #d0e0dc;
     }
-
+    
     QTableWidget::item {
         border-bottom: 2px solid #e0ece8;
         border-right: 2px solid #e0ece8;
     }
-
+    
     QTableWidget::item:selected {
         background-color: #a0d8c0;
         color: #204030;
     }
-
+    
     /* Заголовки столбцов */
     QHeaderView::section {
         background-color: #70b090;
@@ -53,13 +53,13 @@ APP_STYLESHEET = """
         font-weight: bold;
         border: none;
     }
-
+    
     /* Особый стиль для первого столбца (ID) */
     QTableWidget::item:first-child {
         font-weight: bold;
         color: #406050;
     }
-
+    
     /* Кнопки */
     QPushButton {
         background-color: #90d0b0;
@@ -73,18 +73,18 @@ APP_STYLESHEET = """
         text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         transition: all 1s ease; /* не работает */
     }
-
+    
     QPushButton:hover {
         background-color: #a0e0c0;
         border-color: #80b090;
         transform: translateY(-1px);  /* не работает */
     }
-
+    
     QPushButton:pressed {
         background-color: #70a080;
         border-color: #609070;
     }
-
+    
     /* Поля ввода */
     QLineEdit {
         background-color: rgba(255,255,255,220);
@@ -95,10 +95,37 @@ APP_STYLESHEET = """
         font-size: 14px;
         selection-background-color: #a0e0c0;
     }
-
+    
     QLineEdit:focus {
         border: 2px solid #80c8a8;
         background-color: white;
     }
-
+    
+    /*Выпадающие списки*/
+    QComboBox {
+        background-color: white;
+        border: 1px solid #a0b8b0;
+        border-radius: 4px;
+        padding: 8px 30px 8px 12px;
+        color: #405050;
+        font-size: 14px;
+    }
+    
+    QComboBox::drop-down {
+        width: 24px;
+        border-left: 1px solid #c0d8d0;
+    }
+    
+    /*Диалоговые окна*/
+    QDialog{
+        background-color: #f0f8f5;
+        border: 2px solid #90c0a8;
+        border-radius: 8px;
+    }
+    
+    QSpinBox{
+        padding: 5px;
+        border: 1px solid #a0b8b0;
+        border-radius: 4px;
+    }
 """
